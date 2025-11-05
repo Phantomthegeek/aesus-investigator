@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services - Aesus Asset Reclaim</title>
+    <meta name="description" content="Professional asset recovery services for Forex scams, Stock Trading scams, Crypto Fraud, Binary Options, and more.">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+    <script src="icons.js" defer></script>
+    <script src="terms-acceptance.js" defer></script>
+    <script src="siteConfig.js" defer></script>
+    <style>
+        .services-hero {
+            background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 50%, #7dd3fc 100%);
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .services-hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #059669;
+            margin-bottom: 0.5rem;
+        }
+        
+        .services-hero h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 1rem;
+        }
+        
+        .services-hero .highlight {
+            color: #1e40af;
+            font-weight: 800;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            padding: 4rem 0;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 2px solid #f1f5f9;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #1e40af, #3b82f6);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(30, 64, 175, 0.15);
+            border-color: #3b82f6;
+        }
+        
+        .service-icon {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 8px 24px rgba(30, 64, 175, 0.2);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .service-icon svg {
+            width: 48px !important;
+            height: 48px !important;
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            overflow: visible !important;
+            color: white !important;
+        }
+        
+        .service-icon svg path,
+        .service-icon svg circle,
+        .service-icon svg rect,
+        .service-icon svg line,
+        .service-icon svg ellipse {
+            stroke: white !important;
+        }
+        
+        /* Only fill elements that are supposed to be filled */
+        .service-icon svg circle[fill],
+        .service-icon svg rect[fill],
+        .service-icon svg path[fill] {
+            fill: white !important;
+        }
+        
+        .service-card:hover .service-icon {
+            transform: rotate(5deg);
+            box-shadow: 0 12px 32px rgba(30, 64, 175, 0.3);
+        }
+        
+        .service-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 1rem;
+        }
+        
+        .service-card p {
+            font-size: 1rem;
+            color: #64748b;
+            line-height: 1.7;
+        }
+        
+        @media (max-width: 768px) {
+            .services-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .services-hero h2 {
+                font-size: 1.75rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 2rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1 data-company-name style="background: linear-gradient(135deg, #1e40af, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Aesus Asset Reclaim</h1>
+                <p data-slogan>Asset Recovery & Financial Investigations</p>
+            </div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="services.html" class="nav-link active">Services</a>
+                <a href="process.html" class="nav-link">About Us</a>
+                <a href="asset-reclaim.html" class="nav-link">Contact Us</a>
+                <a href="client-login.html" class="nav-link">Client Login</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <section class="services-hero">
+            <div class="container">
+                <h1>Our Services</h1>
+                <h2>Want Your Money Back? We're In the <span class="highlight">Solutions Business!</span></h2>
+            </div>
+        </section>
+
+        <section class="services-section">
+            <div class="container">
+                <div class="services-grid">
+                    <!-- Forex Scams -->
+                    <div class="service-card">
+                        <div class="service-icon" data-icon="forex"></div>
+                        <h3>FOREX SCAMS</h3>
+                        <p>Have you fallen victim to unscrupulous individuals running Forex scams? We specialize in recovering funds lost to fraudulent Forex trading platforms and brokers. Our expert team uses legal procedures and financial sector expertise to confront these entities and recover your money.</p>
+                    </div>
+
+                    <!-- Stock Trading Scams -->
+                    <div class="service-card">
+                        <div class="service-icon" data-icon="stockTrading"></div>
+                        <h3>STOCK TRADING SCAMS</h3>
+                        <p>Many investors have fallen for empty, deceitful promises in stock trading. If you've lost money to fraudulent stock brokers, pump-and-dump schemes, or fake investment platforms, we can help you recover your funds through systematic legal recovery processes.</p>
+                    </div>
+
+                    <!-- Crypto Fraud -->
+                    <div class="service-card">
+                        <div class="service-icon" data-icon="crypto"></div>
+                        <h3>CRYPTO FRAUD</h3>
+                        <p>The cryptocurrency market's relative lack of regulation has made it a playground for con artists. From fake exchanges to exit scams and Ponzi schemes, we help victims of crypto fraud get back what they lost. Our team understands the complexities of blockchain transactions and can trace funds effectively.</p>
+                    </div>
+
+                    <!-- Binary Options -->
+                    <div class="service-card">
+                        <div class="service-icon" data-icon="binaryOptions"></div>
+                        <h3>BINARY OPTIONS SCAMS</h3>
+                        <p>One of the most common financial scams since 2021 and one we have helped countless victims recover from. Binary options fraud often involves manipulated platforms, false promises, and unauthorized withdrawals. We systematically confront these entities and recover your lost funds.</p>
+                    </div>
+
+                    <!-- Nigerian Scams -->
+                    <div class="service-card">
+                        <div class="service-icon" data-icon="nigerianScam"></div>
+                        <h3>NIGERIAN SCAMS</h3>
+                        <p>Traditionally this type of scam starts with an unsolicited email or message proclaiming to be from a wealthy individual, prince, or business opportunity. If you've sent money in response to these schemes, we can help trace the transactions and potentially recover funds through legal channels.</p>
+                    </div>
+
+                    <!-- Ponzi Schemes -->
+                    <div class="service-card">
+                        <div class="service-icon" data-icon="ponzi"></div>
+                        <h3>PONZI SCHEMES</h3>
+                        <p>Ponzi schemes promise high returns with little risk, using new investors' money to pay earlier investors. When these schemes collapse, victims lose everything. We help identify the entities involved and pursue legal action to recover your investments.</p>
+                    </div>
+
+                    <!-- MT760/MT799 Fraud -->
+                    <div class="service-card">
+                        <div class="service-icon" data-icon="mt760"></div>
+                        <h3>MT760/MT799 FRAUD</h3>
+                        <p>Bank guarantee and standby letter of credit frauds (MT760/MT799) are sophisticated schemes that target businesses and investors. These documents are often forged or manipulated. Our team specializes in exposing these frauds and recovering funds for victims.</p>
+                    </div>
+
+                    <!-- Online Investment Scams -->
+                    <div class="service-card">
+                        <div class="service-icon" data-icon="onlineInvestment"></div>
+                        <h3>ONLINE INVESTMENT SCAMS</h3>
+                        <p>From fake trading platforms to fraudulent investment opportunities advertised online, we help recover funds lost to various online investment scams. Our systematic approach includes gathering evidence, confronting entities, and pursuing legal recovery.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section style="background: linear-gradient(135deg, #1e40af, #3b82f6); padding: 4rem 0; text-align: center; color: white;">
+            <div class="container">
+                <h2 style="font-size: 2.5rem; margin-bottom: 1rem; color: white;">Ready to Get Your Money Back?</h2>
+                <p style="font-size: 1.25rem; margin-bottom: 2rem; opacity: 0.95;">Start your free consultation today. No win, no fee.</p>
+                <a href="asset-reclaim.html" class="cta-button" id="servicesCtaButton" style="background: white; color: #1e40af; padding: 1rem 3rem; border-radius: 0.75rem; font-weight: 700; font-size: 1.1rem; text-decoration: none; display: inline-block; transition: all 0.3s ease; box-shadow: 0 4px 20px rgba(0,0,0,0.2);">FREE CONSULTATION NOW</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; <span data-current-year></span> <span data-company-name>Aesus Asset Reclaim</span>. All rights reserved. | Confidentiality Guaranteed</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Initialize icons when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.initAllIcons) {
+                setTimeout(() => window.initAllIcons(), 100);
+            }
+            
+            // Add hover effect to CTA button
+            const ctaButton = document.getElementById('servicesCtaButton');
+            if (ctaButton) {
+                ctaButton.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-2px)';
+                    this.style.boxShadow = '0 6px 24px rgba(0,0,0,0.3)';
+                });
+                ctaButton.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = '0 4px 20px rgba(0,0,0,0.2)';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+

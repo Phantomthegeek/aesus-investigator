@@ -1,0 +1,1517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>Asset Recovery - Aesus Asset Reclaim</title>
+    <meta name="description" content="Professional asset recovery services with secure case submission and confidential handling. Recover your lost, unclaimed, or misappropriated assets.">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+    <script src="icons.js" defer></script>
+    <script src="terms-acceptance.js" defer></script>
+    <script src="siteConfig.js" defer></script>
+    <script src="ui.js" defer></script>
+    <style id="a11y-focus-styles">button:focus-visible, .btn:focus-visible, a:focus-visible {outline:3px solid #3b82f6; outline-offset:2px; box-shadow:0 0 0 4px rgba(30,64,175,0.25);} input:focus-visible, select:focus-visible, textarea:focus-visible {outline:3px solid #3b82f6; outline-offset:2px; box-shadow:0 0 0 4px rgba(30,64,175,0.15);} button:disabled, .btn[aria-disabled="true"] {cursor:not-allowed; opacity:0.7;}</style>
+    <style>
+        .hero-content h2 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #667eea 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            animation: fadeInUp 0.8s ease-out;
+            text-shadow: 0 0 40px rgba(30, 64, 175, 0.2);
+        }
+        
+        .hero-description {
+            font-size: 1.5rem;
+            color: var(--text);
+            max-width: 900px;
+            margin: 0 auto 2rem;
+            font-weight: 500;
+            line-height: 1.7;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        @keyframes shimmer {
+            0% {
+                background-position: -1000px 0;
+            }
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+        
+        /* Trust Badges */
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+            padding: 2.5rem;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 1.5rem;
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            animation: fadeInUp 1.2s ease-out 0.4s both;
+        }
+        
+        .trust-badge {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+            text-align: center;
+            padding: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .trust-badge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(30, 64, 175, 0.05), rgba(59, 130, 246, 0.05));
+            border-radius: 1rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .trust-badge:hover::before {
+            opacity: 1;
+        }
+        
+        .trust-badge:hover {
+            transform: translateY(-5px);
+        }
+        
+        .trust-badge-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            z-index: 1;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        .trust-badge-label {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Service Categories */
+        .service-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+        
+        /* Mobile Responsive Improvements */
+        @media (max-width: 768px) {
+            .hero-content h2 {
+                font-size: 2.5rem;
+                line-height: 1.2;
+                margin-bottom: 0.75rem;
+            }
+            
+            .hero-description {
+                font-size: 1.25rem;
+                padding: 0 1rem;
+            }
+            
+            .trust-badges {
+                gap: 1.5rem;
+                padding: 1.5rem;
+                margin: 1.5rem 0;
+            }
+            
+            .trust-badge-number {
+                font-size: 2rem;
+            }
+            
+            .trust-badge-label {
+                font-size: 0.8rem;
+            }
+            
+            .service-categories {
+                grid-template-columns: 1fr;
+                gap: 1.25rem;
+                margin: 2rem 0;
+            }
+            
+            .service-category {
+                padding: 2rem 1.5rem;
+            }
+            
+            .service-category-icon {
+                width: 70px;
+                height: 70px;
+                font-size: 2.25rem;
+                margin-bottom: 1rem;
+            }
+            
+            .service-category h4 {
+                font-size: 1.1rem;
+                margin-bottom: 0.5rem;
+            }
+            
+            .service-category p {
+                font-size: 0.9rem;
+            }
+            
+            /* Process Timeline Mobile */
+            .process-timeline {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                margin: 2rem 0;
+            }
+            
+            .process-step {
+                text-align: center;
+                padding: 1.5rem;
+            }
+            
+            .process-number {
+                width: 50px;
+                height: 50px;
+                font-size: 1.25rem;
+                margin: 0 auto 1rem;
+            }
+            
+            .process-step h4 {
+                font-size: 1.1rem;
+                margin-bottom: 0.5rem;
+            }
+            
+            .process-step p {
+                font-size: 0.9rem;
+            }
+            
+            /* Testimonials Mobile */
+            div[style*="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr))"] {
+                grid-template-columns: 1fr !important;
+                gap: 1.5rem !important;
+            }
+            
+            div[style*="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr))"] > div {
+                padding: 1.5rem !important;
+            }
+            
+            /* Contact Form Mobile */
+            #contactForm {
+                gap: 1.25rem !important;
+            }
+            
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                padding: 0.875rem !important;
+                font-size: 16px !important; /* Prevents zoom on iOS */
+            }
+            
+            /* Footer Mobile */
+            div[style*="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr))"] {
+                grid-template-columns: 1fr !important;
+                gap: 2rem !important;
+                text-align: center !important;
+            }
+            
+            /* FAQ Mobile */
+            .faq-item {
+                padding: 1.25rem !important;
+                margin-bottom: 0.75rem !important;
+            }
+            
+            .faq-question {
+                font-size: 1rem !important;
+            }
+            
+            .faq-answer {
+                font-size: 0.9rem !important;
+                padding-top: 0.75rem !important;
+            }
+            
+            /* Services Preview Mobile */
+            div[style*="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr))"]:last-of-type {
+                grid-template-columns: 1fr !important;
+                gap: 1.25rem !important;
+            }
+            
+            div[style*="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr))"]:last-of-type .service-card {
+                padding: 1.5rem !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-content h2 {
+                font-size: 2rem;
+            }
+            
+            .hero-description {
+                font-size: 1.1rem;
+            }
+            
+            .trust-badges {
+                gap: 1rem;
+                padding: 1rem;
+            }
+            
+            .trust-badge {
+                padding: 0.75rem;
+                min-width: 80px;
+            }
+            
+            .trust-badge-number {
+                font-size: 1.75rem;
+            }
+            
+            .service-category {
+                padding: 1.75rem 1.25rem;
+            }
+            
+            .service-category-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 2rem;
+            }
+            
+            .card {
+                padding: 1.5rem !important;
+                margin: 0 0.5rem;
+            }
+            
+            .card h3 {
+                font-size: 1.25rem !important;
+            }
+            
+            /* Ensure buttons are thumb-friendly */
+            .btn,
+            button {
+                min-height: 44px !important;
+                font-size: 1rem !important;
+            }
+            
+            /* Prevent horizontal scroll */
+            body {
+                overflow-x: hidden;
+            }
+            
+            /* Improve tap targets */
+            .nav-link,
+            .faq-item,
+            .service-category,
+            .trust-badge {
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+        
+        /* Tablet-specific adjustments */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .hero-content h2 {
+                font-size: 3rem;
+            }
+            
+            .service-categories {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .process-timeline {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            div[style*="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr))"] {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+        }
+        
+        /* Mobile Menu Styles */
+        .mobile-menu-toggle {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+            
+            .nav {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+                z-index: 1000;
+            }
+            
+            .nav.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            .header .container {
+                position: relative;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+            
+            .logo {
+                flex: 1;
+            }
+        }
+        
+        .service-category {
+            padding: 2.5rem 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 1.5rem;
+            border: 2px solid rgba(30, 64, 175, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(30, 64, 175, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .service-category:hover::before {
+            left: 100%;
+        }
+        
+        .service-category:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: rgba(30, 64, 175, 0.4);
+            box-shadow: 0 20px 50px rgba(30, 64, 175, 0.2);
+            background: rgba(255, 255, 255, 1);
+        }
+        
+        .service-category-icon {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            border-radius: 24px;
+            font-size: 2.75rem;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 24px rgba(30, 64, 175, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .service-category:hover .service-category-icon {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 12px 32px rgba(30, 64, 175, 0.3);
+        }
+        
+        .service-category h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 0.75rem;
+        }
+        
+        .service-category p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+        
+        /* Process Timeline */
+        .process-timeline {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+            position: relative;
+        }
+        
+        .process-step {
+            text-align: center;
+            position: relative;
+            padding: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .process-step:hover {
+            transform: translateY(-5px);
+        }
+        
+        .process-number {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            color: white;
+            border-radius: 50%;
+            font-size: 1.75rem;
+            font-weight: 800;
+            box-shadow: 0 8px 24px rgba(30, 64, 175, 0.3);
+            transition: all 0.4s ease;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .process-number::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            opacity: 0.2;
+            z-index: -1;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        .process-step:hover .process-number {
+            transform: scale(1.15);
+            box-shadow: 0 12px 36px rgba(30, 64, 175, 0.4);
+        }
+        
+        .process-step h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+        
+        .process-step p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+        
+        /* No Win No Fee Badge */
+        .guarantee-badge {
+            background: linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%);
+            color: white;
+            padding: 3rem 2.5rem;
+            border-radius: 2rem;
+            text-align: center;
+            margin: 3rem 0;
+            box-shadow: 0 20px 60px rgba(16, 185, 129, 0.4);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+        
+        .guarantee-badge::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .guarantee-badge h3 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            margin-bottom: 0.75rem;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .guarantee-badge p {
+            font-size: 1.25rem;
+            opacity: 0.98;
+            margin: 0;
+            position: relative;
+            z-index: 1;
+            font-weight: 500;
+            line-height: 1.6;
+        }
+        
+        /* Success Metrics */
+        .success-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .metric-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2.5rem 2rem;
+            border-radius: 1.5rem;
+            text-align: center;
+            border: 2px solid rgba(30, 64, 175, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .metric-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #1e40af, #3b82f6);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+        
+        .metric-card:hover::after {
+            transform: scaleX(1);
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(30, 64, 175, 0.15);
+            border-color: rgba(30, 64, 175, 0.3);
+            background: rgba(255, 255, 255, 1);
+        }
+        
+        .metric-value {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.75rem;
+            transition: all 0.4s ease;
+            display: block;
+        }
+        
+        .metric-card:hover .metric-value {
+            transform: scale(1.1);
+            filter: brightness(1.1);
+        }
+        
+        .metric-label {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            border-radius: 18px;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 8px 24px rgba(30, 64, 175, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-icon:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 12px 32px rgba(30, 64, 175, 0.3);
+        }
+        
+        /* Enhanced Button Styles */
+        #startAssessmentBtn {
+            position: relative;
+            z-index: 1000 !important;
+        }
+        
+        #startAssessmentBtn::before {
+            display: none !important;
+        }
+        
+        #startAssessmentBtn::after {
+            display: none !important;
+        }
+        
+        /* FAQ Section */
+        .faq-section {
+            margin: 3rem 0;
+        }
+        
+        .faq-item {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1.75rem;
+            border-radius: 1.25rem;
+            margin-bottom: 1.25rem;
+            border: 2px solid rgba(30, 64, 175, 0.1);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            pointer-events: auto;
+            overflow: hidden;
+        }
+        
+        .faq-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #1e40af, #3b82f6);
+            transform: scaleY(0);
+            transition: transform 0.4s ease;
+        }
+        
+        .faq-item:hover {
+            border-color: rgba(30, 64, 175, 0.3);
+            box-shadow: 0 8px 24px rgba(30, 64, 175, 0.12);
+            transform: translateX(4px);
+        }
+        
+        .faq-item:hover::before {
+            transform: scaleY(1);
+        }
+        
+        .faq-item.active {
+            border-color: rgba(30, 64, 175, 0.5);
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0 12px 32px rgba(30, 64, 175, 0.2);
+            transform: translateX(0);
+        }
+        
+        .faq-item.active::before {
+            transform: scaleY(1);
+        }
+        
+        .faq-question {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            user-select: none;
+            pointer-events: auto;
+            position: relative;
+            z-index: 2;
+            min-height: 60px;
+            padding: 1rem 1.5rem;
+            margin: -1rem -1.5rem;
+            border-radius: 0.5rem;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            cursor: pointer;
+        }
+        
+        .faq-question:active {
+            background-color: rgba(30, 64, 175, 0.05);
+        }
+        
+        .faq-item.active .faq-question {
+            color: var(--primary);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                        margin-top 0.3s ease, 
+                        padding-top 0.3s ease,
+                        padding-bottom 0.3s ease, 
+                        opacity 0.3s ease;
+            margin-top: 0;
+            padding: 0 1.5rem;
+            color: var(--text-light);
+            line-height: 1.7;
+            opacity: 0;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 1000px;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            padding-bottom: 0.5rem;
+            opacity: 1;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                        margin-top 0.3s ease, 
+                        padding-top 0.3s ease,
+                        padding-bottom 0.3s ease, 
+                        opacity 0.4s ease 0.1s;
+        }
+        
+        .faq-toggle {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(30, 64, 175, 0.1), rgba(59, 130, 246, 0.1));
+            border-radius: 50%;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+            cursor: pointer;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            position: relative;
+        }
+        
+        .faq-item:hover .faq-toggle,
+        .faq-toggle:hover {
+            background: linear-gradient(135deg, rgba(30, 64, 175, 0.2), rgba(59, 130, 246, 0.2));
+            transform: scale(1.1);
+        }
+        
+        .faq-toggle:active {
+            transform: scale(0.95);
+        }
+        
+        .faq-item.active .faq-toggle {
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            color: white;
+            transform: rotate(45deg);
+            box-shadow: 0 2px 8px rgba(30, 64, 175, 0.3);
+        }
+        
+        /* Service Preview Icon Styling */
+        [data-icon] {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        [data-icon] svg {
+            width: 40px;
+            height: 40px;
+        }
+        
+        @media (max-width: 768px) {
+            .trust-badges {
+                gap: 2rem;
+                padding: 2rem 1.5rem;
+            }
+            
+            .service-categories {
+                grid-template-columns: 1fr;
+                gap: 1.25rem;
+            }
+            
+            .process-timeline {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-content h2 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-description {
+                font-size: 1.25rem;
+            }
+            
+            .guarantee-badge {
+                padding: 2rem 1.5rem;
+            }
+            
+            .guarantee-badge h3 {
+                font-size: 1.75rem;
+            }
+            
+            .guarantee-badge p {
+                font-size: 1.1rem;
+            }
+            
+            .metric-card {
+                padding: 2rem 1.5rem;
+            }
+            
+            .metric-value {
+                font-size: 2.5rem;
+            }
+            
+            /* Enhanced mobile FAQ touch interactions */
+            .faq-question {
+                min-height: 70px;
+                padding: 1.25rem 1.5rem;
+                margin: -1.25rem -1.5rem;
+            }
+            
+            .faq-toggle {
+                width: 48px;
+                height: 48px;
+                font-size: 1.5rem;
+            }
+            
+            .faq-item {
+                margin-bottom: 1rem;
+                border-radius: 0.75rem;
+            }
+            
+            /* Prevent double-tap zoom on mobile */
+            .faq-question,
+            .faq-toggle {
+                touch-action: manipulation;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1 data-company-name style="background: linear-gradient(135deg, #1e40af, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Aesus Asset Reclaim</h1>
+                <p data-slogan>Asset Recovery & Financial Investigations</p>
+            </div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link active">Home</a>
+                <a href="services.html" class="nav-link">Services</a>
+                <a href="process.html" class="nav-link">About Us</a>
+                <a href="asset-reclaim.html" class="nav-link">Contact Us</a>
+                <a href="client-login.html" class="nav-link">Client Login</a>
+            </nav>
+            
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" style="display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; padding: 0.5rem; color: var(--text);">
+                ☰
+            </button>
+        </div>
+    </header>
+
+    <main class="main">
+        <section class="hero">
+            <div class="container">
+                <!-- Enhanced Hero Section -->
+                <div class="hero-content" style="max-width: 900px; margin: 0 auto;">
+                    <h2>Recover What's Rightfully Yours</h2>
+                    <p class="hero-description">
+                        Expert asset recovery services with a <strong>100% free assessment</strong> and <strong>no win, no fee</strong> guarantee.
+                    </p>
+                </div>
+
+                <!-- Trust Badges -->
+                <div class="trust-badges" style="max-width: 1000px; margin: 3rem auto;">
+                    <div class="trust-badge">
+                        <div class="trust-badge-number" data-stat="assetsRecovered">£2.5M+</div>
+                        <div class="trust-badge-label">Recovered</div>
+                    </div>
+                    <div class="trust-badge">
+                        <div class="trust-badge-number" data-stat="successCases">1,200+</div>
+                        <div class="trust-badge-label">Success Cases</div>
+                    </div>
+                    <div class="trust-badge">
+                        <div class="trust-badge-number" data-stat="successRate">98%</div>
+                        <div class="trust-badge-label">Success Rate</div>
+                    </div>
+                </div>
+
+                <!-- Main CTA -->
+                <div style="max-width: 800px; margin: 3rem auto;">
+                    <div class="card" style="animation-delay: 0.3s; text-align: center; padding: 3rem; position: relative;">
+                        <h3 style="font-size: 1.75rem; margin-bottom: 1rem;">Start Your Free Assessment</h3>
+                        <p style="font-size: 1.1rem; color: var(--text-light); margin-bottom: 2rem;">
+                            Get expert evaluation of your case in 24 hours. No obligation, completely risk-free.
+                        </p>
+                        
+                        <div style="text-align: center; margin-bottom: 2rem;">
+                            <button 
+                                id="startAssessmentBtn" 
+                                type="button" 
+                                style="
+                                    background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+                                    color: white;
+                                    border: none;
+                                    width: 100%;
+                                    max-width: 500px;
+                                    padding: 1.5rem 3rem;
+                                    font-size: 1.25rem;
+                                    box-shadow: 0 8px 24px rgba(30, 64, 175, 0.35);
+                                    font-weight: 700;
+                                    display: block;
+                                    cursor: pointer;
+                                    text-align: center;
+                                    border-radius: 0.75rem;
+                                    transition: all 0.3s ease;
+                                    font-family: inherit;
+                                    margin: 0 auto;
+                                ">
+                                🚀 Start Free Assessment
+                            </button>
+                        </div>
+                        
+                        <div style="text-align: center; margin-top: 1.5rem; font-size: 0.95rem; color: var(--text-light); display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+                            <span>✅ 100% Free</span>
+                            <span>✅ No Win No Fee</span>
+                            <span>✅ 24hr Response</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Section -->
+                <div class="faq-section" style="margin: 3rem 0;">
+                    <div class="card" style="animation-delay: 0.4s;">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;">
+                            <div class="feature-icon">❓</div>
+                            <h3 style="margin: 0;">Frequently Asked Questions</h3>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>What is "No Win, No Fee"?</span>
+                                <span class="faq-toggle">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                "No Win, No Fee" means you pay absolutely nothing if we don't successfully recover your assets. Our fee is only a percentage of what we recover for you. The initial assessment is 100% free with no obligation.
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>How long does asset recovery take?</span>
+                                <span class="faq-toggle">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                Recovery times vary based on asset type and complexity. Simple cases can be resolved in 30-45 days, while complex cases may take 3-6 months. We provide a clear timeline after the free assessment.
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>What types of assets can you recover?</span>
+                                <span class="faq-toggle">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                We recover all types of assets including: unclaimed bank accounts, dividends, bonds, stocks, property deposits, pension funds, inheritance, insurance claims, and financial settlements. If it's rightfully yours, we can help recover it.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Process Timeline Section -->
+                <div style="margin: 4rem 0; padding: 3rem 0;">
+                    <div class="card" style="animation-delay: 0.6s;">
+                        <div style="text-align: center; margin-bottom: 3rem;">
+                            <h2 style="font-size: 2.5rem; font-weight: 800; color: #059669; margin-bottom: 0.5rem;">Our Process</h2>
+                            <h3 style="font-size: 1.75rem; font-weight: 700; color: #1e293b; margin-bottom: 1rem;">Simple, Transparent, Effective</h3>
+                        </div>
+
+                        <div class="process-timeline">
+                            <div class="process-step">
+                                <div class="process-number">1</div>
+                                <h4>Submit Your Case</h4>
+                                <p>Complete our secure online form with your case details. All information is fully confidential.</p>
+                            </div>
+                            <div class="process-step">
+                                <div class="process-number">2</div>
+                                <h4>Free Assessment</h4>
+                                <p>A licensed investigator will assess your case within 24 hours — 100% free, with no obligation.</p>
+                            </div>
+                            <div class="process-step">
+                                <div class="process-number">3</div>
+                                <h4>Investigation Plan</h4>
+                                <p>We create a bespoke recovery plan and begin the investigation process tailored to your situation.</p>
+                            </div>
+                            <div class="process-step">
+                                <div class="process-number">4</div>
+                                <h4>Asset Recovery</h4>
+                                <p>Once assets are successfully recovered, a small percentage fee is charged — no win, no fee.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonials Section -->
+                <div style="margin: 4rem 0; padding: 3rem 0;">
+                    <div class="card" style="animation-delay: 0.7s;">
+                        <div style="text-align: center; margin-bottom: 3rem;">
+                            <h2 style="font-size: 2.5rem; font-weight: 800; color: #059669; margin-bottom: 0.5rem;">What Our Clients Say</h2>
+                            <h3 style="font-size: 1.75rem; font-weight: 700; color: #1e293b; margin-bottom: 1rem;">Trusted by Thousands of Satisfied Clients</h3>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                            <div style="background: white; padding: 2rem; border-radius: 1rem; border: 2px solid #f1f5f9; transition: all 0.3s ease;">
+                                <div style="margin-bottom: 1.5rem;">
+                                    <div style="color: #ffc107; font-size: 1.5rem;">★★★★★</div>
+                                </div>
+                                <p style="font-style: italic; margin-bottom: 1.5rem; line-height: 1.6;">"I never imagined I'd recover funds from an old investment, but Aesus made it happen — no win, no fee really means no risk."</p>
+                                <div style="font-weight: 700; color: #1e293b;">Sarah M.</div>
+                                <div style="font-size: 0.9rem; color: #64748b;">Manchester, UK</div>
+                            </div>
+                            
+                            <div style="background: white; padding: 2rem; border-radius: 1rem; border: 2px solid #f1f5f9; transition: all 0.3s ease;">
+                                <div style="margin-bottom: 1.5rem;">
+                                    <div style="color: #ffc107; font-size: 1.5rem;">★★★★★</div>
+                                </div>
+                                <p style="font-style: italic; margin-bottom: 1.5rem; line-height: 1.6;">"Incredibly professional and transparent service. They recovered money I thought was lost years ago."</p>
+                                <div style="font-weight: 700; color: #1e293b;">James P.</div>
+                                <div style="font-size: 0.9rem; color: #64748b;">London, UK</div>
+                            </div>
+                            
+                            <div style="background: white; padding: 2rem; border-radius: 1rem; border: 2px solid #f1f5f9; transition: all 0.3s ease;">
+                                <div style="margin-bottom: 1.5rem;">
+                                    <div style="color: #ffc107; font-size: 1.5rem;">★★★★★</div>
+                                </div>
+                                <p style="font-style: italic; margin-bottom: 1.5rem; line-height: 1.6;">"Aesus Asset Reclaim exceeded expectations. Brilliant communication and a fast turnaround."</p>
+                                <div style="font-weight: 700; color: #1e293b;">Elaine R.</div>
+                                <div style="font-size: 0.9rem; color: #64748b;">Birmingham, UK</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form Section -->
+                <div style="margin: 4rem 0; padding: 3rem 0;">
+                    <div class="card" style="animation-delay: 0.8s;">
+                        <div style="text-align: center; margin-bottom: 3rem;">
+                            <h2 style="font-size: 2.5rem; font-weight: 800; color: #059669; margin-bottom: 0.5rem;">Get In Touch</h2>
+                            <h3 style="font-size: 1.75rem; font-weight: 700; color: #1e293b; margin-bottom: 1rem;">Ready to Recover Your Assets?</h3>
+                        </div>
+
+                        <div style="max-width: 600px; margin: 0 auto;">
+                            <form id="contactForm" style="display: grid; gap: 1.5rem;">
+                                <div>
+                                    <label for="fullName" style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #1e293b;">Full Name *</label>
+                                    <input type="text" id="fullName" name="fullName" required style="width: 100%; padding: 1rem; border: 2px solid #e2e8f0; border-radius: 0.5rem; font-size: 1rem; transition: border-color 0.3s ease;" onfocus="this.style.borderColor='#3b82f6';" onblur="this.style.borderColor='#e2e8f0';">
+                                </div>
+                                
+                                <div>
+                                    <label for="email" style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #1e293b;">Email Address *</label>
+                                    <input type="email" id="email" name="email" required style="width: 100%; padding: 1rem; border: 2px solid #e2e8f0; border-radius: 0.5rem; font-size: 1rem; transition: border-color 0.3s ease;" onfocus="this.style.borderColor='#3b82f6';" onblur="this.style.borderColor='#e2e8f0';">
+                                </div>
+                                
+                                <div>
+                                    <label for="phone" style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #1e293b;">Phone Number</label>
+                                    <input type="tel" id="phone" name="phone" style="width: 100%; padding: 1rem; border: 2px solid #e2e8f0; border-radius: 0.5rem; font-size: 1rem; transition: border-color 0.3s ease;" onfocus="this.style.borderColor='#3b82f6';" onblur="this.style.borderColor='#e2e8f0';">
+                                </div>
+                                
+                                <div>
+                                    <label for="caseType" style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #1e293b;">Case Type *</label>
+                                    <select id="caseType" name="caseType" required style="width: 100%; padding: 1rem; border: 2px solid #e2e8f0; border-radius: 0.5rem; font-size: 1rem; transition: border-color 0.3s ease; background: white;" onfocus="this.style.borderColor='#3b82f6';" onblur="this.style.borderColor='#e2e8f0';">
+                                        <option value="">Select a case type...</option>
+                                        <option value="forex">Forex Scam</option>
+                                        <option value="crypto">Cryptocurrency Fraud</option>
+                                        <option value="binary">Binary Options Scam</option>
+                                        <option value="stock">Stock Trading Fraud</option>
+                                        <option value="other">Other Financial Fraud</option>
+                                    </select>
+                                </div>
+                                
+                                <div>
+                                    <label for="message" style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #1e293b;">Message *</label>
+                                    <textarea id="message" name="message" rows="5" required style="width: 100%; padding: 1rem; border: 2px solid #e2e8f0; border-radius: 0.5rem; font-size: 1rem; transition: border-color 0.3s ease; resize: vertical;" onfocus="this.style.borderColor='#3b82f6';" onblur="this.style.borderColor='#e2e8f0';"></textarea>
+                                </div>
+                                
+                                <div style="text-align: center;">
+                                    <button type="submit" style="background: linear-gradient(135deg, #1e40af, #3b82f6); color: white; padding: 1rem 2.5rem; border: none; border-radius: 0.75rem; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 20px rgba(30, 64, 175, 0.3);" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 24px rgba(30, 64, 175, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 20px rgba(30, 64, 175, 0.3)';">
+                                        Submit Enquiry
+                                    </button>
+                                </div>
+                            </form>
+                            
+                            <div id="formMessage" style="margin-top: 1.5rem; padding: 1rem; border-radius: 0.5rem; display: none;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Services Preview Section -->
+                <div style="margin: 4rem 0; padding: 3rem 0;">
+                    <div class="card" style="animation-delay: 0.5s;">
+                        <div style="text-align: center; margin-bottom: 3rem;">
+                            <h2 style="font-size: 2.5rem; font-weight: 800; color: #059669; margin-bottom: 0.5rem;">Our Services</h2>
+                            <h3 style="font-size: 1.75rem; font-weight: 700; color: #1e293b; margin-bottom: 1rem;">Want Your Money Back? We're In the <span style="color: #1e40af;">Solutions Business!</span></h3>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 2rem;">
+                            <div style="background: white; padding: 2rem; border-radius: 1rem; border: 2px solid #f1f5f9; transition: all 0.3s ease; cursor: pointer;" 
+                                 onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='#3b82f6'; this.style.boxShadow='0 8px 24px rgba(30, 64, 175, 0.15)';"
+                                 onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='#f1f5f9'; this.style.boxShadow='none';"
+                                 onclick="window.location.href='services.html'; return false;">
+                                <div style="width: 70px; height: 70px; background: linear-gradient(135deg, #1e40af, #3b82f6); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; color: white;" data-icon="forex"></div>
+                                <h4 style="font-size: 1.25rem; font-weight: 700; color: #1e293b; margin-bottom: 0.5rem;">Forex Scams</h4>
+                                <p style="font-size: 0.95rem; color: #64748b; line-height: 1.6;">Recover funds from fraudulent Forex trading platforms.</p>
+                            </div>
+
+                            <div style="background: white; padding: 2rem; border-radius: 1rem; border: 2px solid #f1f5f9; transition: all 0.3s ease; cursor: pointer;"
+                                 onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='#3b82f6'; this.style.boxShadow='0 8px 24px rgba(30, 64, 175, 0.15)';"
+                                 onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='#f1f5f9'; this.style.boxShadow='none';"
+                                 onclick="window.location.href='services.html'; return false;">
+                                <div style="width: 70px; height: 70px; background: linear-gradient(135deg, #1e40af, #3b82f6); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; color: white;" data-icon="crypto"></div>
+                                <h4 style="font-size: 1.25rem; font-weight: 700; color: #1e293b; margin-bottom: 0.5rem;">Crypto Fraud</h4>
+                                <p style="font-size: 0.95rem; color: #64748b; line-height: 1.6;">Get back what you lost to cryptocurrency scams.</p>
+                            </div>
+
+                            <div style="background: white; padding: 2rem; border-radius: 1rem; border: 2px solid #f1f5f9; transition: all 0.3s ease; cursor: pointer;"
+                                 onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='#3b82f6'; this.style.boxShadow='0 8px 24px rgba(30, 64, 175, 0.15)';"
+                                 onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='#f1f5f9'; this.style.boxShadow='none';"
+                                 onclick="window.location.href='services.html'; return false;">
+                                <div style="width: 70px; height: 70px; background: linear-gradient(135deg, #1e40af, #3b82f6); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; color: white;" data-icon="binaryOptions"></div>
+                                <h4 style="font-size: 1.25rem; font-weight: 700; color: #1e293b; margin-bottom: 0.5rem;">Binary Options</h4>
+                                <p style="font-size: 0.95rem; color: #64748b; line-height: 1.6;">Recover from common financial scams since 2021.</p>
+                            </div>
+
+                            <div style="background: white; padding: 2rem; border-radius: 1rem; border: 2px solid #f1f5f9; transition: all 0.3s ease; cursor: pointer;"
+                                 onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='#3b82f6'; this.style.boxShadow='0 8px 24px rgba(30, 64, 175, 0.15)';"
+                                 onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='#f1f5f9'; this.style.boxShadow='none';"
+                                 onclick="window.location.href='services.html'; return false;">
+                                <div style="width: 70px; height: 70px; background: linear-gradient(135deg, #1e40af, #3b82f6); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; color: white;" data-icon="stockTrading"></div>
+                                <h4 style="font-size: 1.25rem; font-weight: 700; color: #1e293b; margin-bottom: 0.5rem;">Stock Trading</h4>
+                                <p style="font-size: 0.95rem; color: #64748b; line-height: 1.6;">Recover funds from fraudulent stock brokers.</p>
+                            </div>
+                        </div>
+
+                        <div style="text-align: center; margin-top: 3rem; position: relative; z-index: 10;">
+                            <a href="services.html" id="viewAllServicesBtn" class="cta-button" style="background: linear-gradient(135deg, #1e40af, #3b82f6); color: white; padding: 1rem 2.5rem; border-radius: 0.75rem; font-weight: 700; text-decoration: none; display: inline-block; transition: all 0.3s ease; box-shadow: 0 4px 20px rgba(30, 64, 175, 0.3); position: relative; z-index: 100; cursor: pointer; pointer-events: auto;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 24px rgba(30, 64, 175, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 20px rgba(30, 64, 175, 0.3)';" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='services.html'; return false;">View All Services →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 2rem; padding: 2rem 0;">
+                <!-- Column 1: Company Info -->
+                <div>
+                    <h4 style="font-size: 1.1rem; font-weight: 700; color: #1e293b; margin-bottom: 1rem;" data-company-name>Aesus Asset Reclaim</h4>
+                    <p style="font-size: 0.95rem; color: #64748b; line-height: 1.7;">Aesus Asset Reclaim is a funds recovery firm and specializes in cases globally. We help victims recover money lost to scams and fraud.</p>
+                </div>
+
+                <!-- Column 2: Links -->
+                <div>
+                    <h4 style="font-size: 1.1rem; font-weight: 700; color: #1e293b; margin-bottom: 1rem;">Links</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.75rem;"><a href="process.html" style="color: #64748b; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#1e40af'" onmouseout="this.style.color='#64748b'">About</a></li>
+                        <li style="margin-bottom: 0.75rem;"><a href="asset-reclaim.html" style="color: #64748b; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#1e40af'" onmouseout="this.style.color='#64748b'">Contact</a></li>
+                        <li style="margin-bottom: 0.75rem;"><a href="index.html#faq" style="color: #64748b; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#1e40af'" onmouseout="this.style.color='#64748b'">FAQs</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Services -->
+                <div>
+                    <h4 style="font-size: 1.1rem; font-weight: 700; color: #1e293b; margin-bottom: 1rem;">Services</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.95rem; color: #64748b;">
+                        <li style="margin-bottom: 0.75rem;">Binary Options scams</li>
+                        <li style="margin-bottom: 0.75rem;">Cryptocurrency Scams</li>
+                        <li style="margin-bottom: 0.75rem;">Forex scams</li>
+                        <li style="margin-bottom: 0.75rem;">Stock Trading Scams</li>
+                        <li style="margin-bottom: 0.75rem;">MT760/MT799 Fraud</li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Contact -->
+                <div>
+                    <h4 style="font-size: 1.1rem; font-weight: 700; color: #1e293b; margin-bottom: 1rem;">Contact</h4>
+                    <p style="font-size: 0.95rem; color: #64748b; margin-bottom: 0.75rem;">
+                        <span style="margin-right: 0.5rem;">📧</span>
+                        <a href="mailto:contact@aesusinvestigators.com" data-email style="color: #64748b; text-decoration: none;">contact@aesusinvestigators.com</a>
+                    </p>
+                    <p style="font-size: 0.95rem; color: #64748b;">
+                        <span style="margin-right: 0.5rem;">📞</span>
+                        <a href="tel:+442079460275" data-phone style="color: #64748b; text-decoration: none;">+44 20 7946 0275</a>
+                    </p>
+                </div>
+            </div>
+
+            <div style="text-align: center; padding-top: 2rem; border-top: 1px solid #e2e8f0;">
+                <p>&copy; <span data-current-year></span> All Rights Reserved. <span data-company-name>Aesus Asset Reclaim</span>.</p>
+            <p style="margin-top: 1rem; font-size: 0.875rem;">
+                <a href="privacy-policy.html" style="color: var(--text-light); text-decoration: none; margin-right: 1rem; transition: color 0.2s;">Privacy Policy</a>
+                <a href="terms-of-service.html" style="color: var(--text-light); text-decoration: none; transition: color 0.2s;">Terms of Service</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Toggle Functionality
+        (function() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            let touchStartTime = 0;
+            let touchEndTime = 0;
+            
+            faqItems.forEach(function(faqItem) {
+                const question = faqItem.querySelector('.faq-question');
+                const toggle = faqItem.querySelector('.faq-toggle');
+                
+                if (question) {
+                    // Enhanced click handling with touch support
+                    function handleToggle(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        
+                        // Prevent rapid clicking
+                        const currentTime = new Date().getTime();
+                        if (currentTime - touchEndTime < 300) {
+                            return;
+                        }
+                        
+                        const wasActive = faqItem.classList.contains('active');
+                        document.querySelectorAll('.faq-item').forEach(item => item.classList.remove('active'));
+                        if (!wasActive) {
+                            faqItem.classList.add('active');
+                        }
+                        
+                        touchEndTime = currentTime;
+                    }
+                    
+                    // Click events
+                    question.addEventListener('click', handleToggle);
+                    
+                    // Touch events for better mobile response
+                    question.addEventListener('touchstart', function(e) {
+                        touchStartTime = new Date().getTime();
+                        this.style.backgroundColor = 'rgba(30, 64, 175, 0.05)';
+                    });
+                    
+                    question.addEventListener('touchend', function(e) {
+                        this.style.backgroundColor = '';
+                        handleToggle(e);
+                    });
+                    
+                    question.addEventListener('touchcancel', function(e) {
+                        this.style.backgroundColor = '';
+                    });
+                    
+                    // Also make the toggle button clickable
+                    if (toggle) {
+                        toggle.addEventListener('click', function(e) {
+                            e.stopPropagation();
+                            handleToggle(e);
+                        });
+                        
+                        toggle.addEventListener('touchstart', function(e) {
+                            e.stopPropagation();
+                            this.style.transform = 'scale(0.95)';
+                        });
+                        
+                        toggle.addEventListener('touchend', function(e) {
+                            this.style.transform = '';
+                        });
+                    }
+                }
+            });
+        })();
+        
+        // Mobile Menu Toggle Functionality
+        (function() {
+            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+            const nav = document.querySelector('.nav');
+            
+            if (mobileMenuToggle && nav) {
+                mobileMenuToggle.addEventListener('click', function() {
+                    const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                    this.setAttribute('aria-expanded', !isExpanded);
+                    nav.classList.toggle('active');
+                    
+                    // Change icon based on state
+                    this.textContent = isExpanded ? '☰' : '✕';
+                });
+                
+                // Close menu when clicking on nav links
+                nav.querySelectorAll('.nav-link').forEach(link => {
+                    link.addEventListener('click', function() {
+                        nav.classList.remove('active');
+                        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                        mobileMenuToggle.textContent = '☰';
+                    });
+                });
+                
+                // Close menu when clicking outside
+                document.addEventListener('click', function(event) {
+                    if (!event.target.closest('.header')) {
+                        nav.classList.remove('active');
+                        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                        mobileMenuToggle.textContent = '☰';
+                    }
+                });
+            }
+        })();
+        
+        // Year is now handled by siteConfig.js
+        
+        // Contact Form Functionality
+        (function() {
+            const contactForm = document.getElementById('contactForm');
+            const formMessage = document.getElementById('formMessage');
+            
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Get form data
+                    const formData = new FormData(contactForm);
+                    const data = Object.fromEntries(formData);
+                    
+                    // Simple validation
+                    if (!data.fullName || !data.email || !data.caseType || !data.message) {
+                        showFormMessage('Please fill in all required fields.', 'error');
+                        return;
+                    }
+                    
+                    // Email validation
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailRegex.test(data.email)) {
+                        showFormMessage('Please enter a valid email address.', 'error');
+                        return;
+                    }
+                    
+                    // Simulate form submission (replace with actual API call)
+                    showFormMessage('Submitting your enquiry...', 'info');
+                    
+                    setTimeout(function() {
+                        showFormMessage('Thank you for contacting Aesus Asset Reclaim. A licensed investigator will respond within 24 hours.', 'success');
+                        contactForm.reset();
+                        
+                        // Hide success message after 5 seconds
+                        setTimeout(function() {
+                            formMessage.style.display = 'none';
+                        }, 5000);
+                    }, 1500);
+                });
+            }
+            
+            function showFormMessage(message, type) {
+                if (!formMessage) return;
+                
+                formMessage.textContent = message;
+                formMessage.style.display = 'block';
+                
+                // Remove previous classes
+                formMessage.className = '';
+                
+                // Add appropriate styling based on type
+                if (type === 'error') {
+                    formMessage.style.backgroundColor = '#fee2e2';
+                    formMessage.style.color = '#dc2626';
+                    formMessage.style.border = '1px solid #fca5a5';
+                } else if (type === 'success') {
+                    formMessage.style.backgroundColor = '#dcfce7';
+                    formMessage.style.color = '#16a34a';
+                    formMessage.style.border = '1px solid #86efac';
+                } else if (type === 'info') {
+                    formMessage.style.backgroundColor = '#dbeafe';
+                    formMessage.style.color = '#2563eb';
+                    formMessage.style.border = '1px solid #93c5fd';
+                }
+            }
+        })();
+        
+        // Button click handlers - must use event listener due to CSP
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize icons
+            if (typeof window.initAllIcons === 'function') {
+                setTimeout(() => window.initAllIcons(), 100);
+            }
+            
+            // Start Assessment Button
+            const btn = document.getElementById('startAssessmentBtn');
+            if (btn) {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('Button clicked!');
+                    window.location.href = 'asset-reclaim.html';
+                    return false;
+                });
+            } else {
+                console.error('Start Assessment Button not found!');
+            }
+            
+            // View All Services Button
+            const viewAllBtn = document.getElementById('viewAllServicesBtn');
+            if (viewAllBtn) {
+                viewAllBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('View All Services clicked!');
+                    window.location.href = 'services.html';
+                    return false;
+                });
+                
+                // Ensure button is clickable
+                viewAllBtn.style.pointerEvents = 'auto';
+                viewAllBtn.style.cursor = 'pointer';
+            } else {
+                console.error('View All Services Button not found!');
+            }
+        });
+    </script>
+</body>
+</html>

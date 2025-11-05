@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asset Reclaim Services - Aesus Asset Reclaim</title>
+    <meta name="description" content="Professional asset reclaim services with secure case submission and confidential handling.">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+    <script src="icons.js" defer></script>
+    <script src="terms-acceptance.js" defer></script>
+    <script src="siteConfig.js" defer></script>
+    <style>
+        .hero-content h2 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #667eea 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            animation: fadeInUp 0.8s ease-out;
+            text-shadow: 0 0 40px rgba(30, 64, 175, 0.2);
+        }
+        
+        .hero-description {
+            font-size: 1.5rem;
+            color: var(--text);
+            max-width: 900px;
+            margin: 0 auto 2rem;
+            font-weight: 500;
+            line-height: 1.7;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        @keyframes shimmer {
+            0% {
+                background-position: -1000px 0;
+            }
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+        
+        /* Trust Badges */
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+            padding: 2.5rem;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 1.5rem;
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            animation: fadeInUp 1.2s ease-out 0.4s both;
+        }
+        
+        .trust-badge {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+            text-align: center;
+            padding: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .trust-badge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(30, 64, 175, 0.05), rgba(59, 130, 246, 0.05));
+            border-radius: 1rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .trust-badge:hover::before {
+            opacity: 1;
+        }
+        
+        .trust-badge:hover {
+            transform: translateY(-5px);
+        }
+        
+        .trust-badge-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            z-index: 1;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        .trust-badge-label {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Service Categories */
+        /* Removed service-categories from form page */
+        
+        .service-category {
+            padding: 2.5rem 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 1.5rem;
+            border: 2px solid rgba(30, 64, 175, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(30, 64, 175, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .service-category:hover::before {
+            left: 100%;
+        }
+        
+        .service-category:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: rgba(30, 64, 175, 0.4);
+            box-shadow: 0 20px 50px rgba(30, 64, 175, 0.2);
+            background: rgba(255, 255, 255, 1);
+        }
+        
+        .service-category-icon {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            border-radius: 24px;
+            font-size: 2.75rem;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 24px rgba(30, 64, 175, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .service-category:hover .service-category-icon {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 12px 32px rgba(30, 64, 175, 0.3);
+        }
+        
+        .service-category h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 0.75rem;
+        }
+        
+        .service-category p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+        
+        /* Process Timeline */
+        .process-timeline {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+            position: relative;
+        }
+        
+        .process-step {
+            text-align: center;
+            position: relative;
+            padding: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .process-step:hover {
+            transform: translateY(-5px);
+        }
+        
+        .process-number {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            color: white;
+            border-radius: 50%;
+            font-size: 1.75rem;
+            font-weight: 800;
+            box-shadow: 0 8px 24px rgba(30, 64, 175, 0.3);
+            transition: all 0.4s ease;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .process-number::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            opacity: 0.2;
+            z-index: -1;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        .process-step:hover .process-number {
+            transform: scale(1.15);
+            box-shadow: 0 12px 36px rgba(30, 64, 175, 0.4);
+        }
+        
+        .process-step h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+        
+        .process-step p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+        
+        /* No Win No Fee Badge */
+        .guarantee-badge {
+            background: linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%);
+            color: white;
+            padding: 3rem 2.5rem;
+            border-radius: 2rem;
+            text-align: center;
+            margin: 3rem 0;
+            box-shadow: 0 20px 60px rgba(16, 185, 129, 0.4);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+        
+        .guarantee-badge::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .guarantee-badge h3 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            margin-bottom: 0.75rem;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .guarantee-badge p {
+            font-size: 1.25rem;
+            opacity: 0.98;
+            margin: 0;
+            position: relative;
+            z-index: 1;
+            font-weight: 500;
+            line-height: 1.6;
+        }
+        
+        /* Success Metrics */
+        .success-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .metric-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2.5rem 2rem;
+            border-radius: 1.5rem;
+            text-align: center;
+            border: 2px solid rgba(30, 64, 175, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .metric-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #1e40af, #3b82f6);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+        
+        .metric-card:hover::after {
+            transform: scaleX(1);
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(30, 64, 175, 0.15);
+            border-color: rgba(30, 64, 175, 0.3);
+            background: rgba(255, 255, 255, 1);
+        }
+        
+        .metric-value {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.75rem;
+            transition: all 0.4s ease;
+            display: block;
+        }
+        
+        .metric-card:hover .metric-value {
+            transform: scale(1.1);
+            filter: brightness(1.1);
+        }
+        
+        .metric-label {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        /* FAQ Section */
+        .faq-section {
+            margin: 3rem 0;
+        }
+        
+        .faq-item {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1.75rem;
+            border-radius: 1.25rem;
+            margin-bottom: 1.25rem;
+            border: 2px solid rgba(30, 64, 175, 0.1);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            pointer-events: auto;
+            overflow: hidden;
+        }
+        
+        .faq-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #1e40af, #3b82f6);
+            transform: scaleY(0);
+            transition: transform 0.4s ease;
+        }
+        
+        .faq-item:hover {
+            border-color: rgba(30, 64, 175, 0.3);
+            box-shadow: 0 8px 24px rgba(30, 64, 175, 0.12);
+            transform: translateX(4px);
+        }
+        
+        .faq-item:hover::before {
+            transform: scaleY(1);
+        }
+        
+        .faq-item.active {
+            border-color: rgba(30, 64, 175, 0.5);
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0 12px 32px rgba(30, 64, 175, 0.2);
+            transform: translateX(0);
+        }
+        
+        .faq-item.active::before {
+            transform: scaleY(1);
+        }
+        
+        .faq-question {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            user-select: none;
+            pointer-events: auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .faq-item.active .faq-question {
+            color: var(--primary);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                        margin-top 0.3s ease, 
+                        padding-top 0.3s ease,
+                        padding-bottom 0.3s ease, 
+                        opacity 0.3s ease;
+            margin-top: 0;
+            padding: 0 1.5rem;
+            color: var(--text-light);
+            line-height: 1.7;
+            opacity: 0;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 1000px;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            padding-bottom: 0.5rem;
+            opacity: 1;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                        margin-top 0.3s ease, 
+                        padding-top 0.3s ease,
+                        padding-bottom 0.3s ease, 
+                        opacity 0.4s ease 0.1s;
+        }
+        
+        .faq-toggle {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(30, 64, 175, 0.1), rgba(59, 130, 246, 0.1));
+            border-radius: 50%;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+        
+        .faq-item:hover .faq-toggle {
+            background: linear-gradient(135deg, rgba(30, 64, 175, 0.2), rgba(59, 130, 246, 0.2));
+            transform: scale(1.1);
+        }
+        
+        .faq-item.active .faq-toggle {
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            color: white;
+            transform: rotate(45deg);
+            box-shadow: 0 2px 8px rgba(30, 64, 175, 0.3);
+        }
+        
+        /* Contact Methods */
+        .contact-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .contact-method {
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 1.25rem;
+            text-align: center;
+            border: 2px solid rgba(30, 64, 175, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .contact-method:hover {
+            transform: translateY(-4px);
+            border-color: rgba(30, 64, 175, 0.3);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+        
+        .contact-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            border-radius: 18px;
+            font-size: 2rem;
+        }
+        
+        /* Urgency Banner */
+        .urgency-banner {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 50%, #b45309 100%);
+            color: white;
+            padding: 2rem 1.5rem;
+            border-radius: 1.5rem;
+            text-align: center;
+            margin: 2rem 0;
+            box-shadow: 0 12px 40px rgba(245, 158, 11, 0.4);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 1.4s ease-out 0.8s both;
+        }
+        
+        .urgency-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+        
+        .urgency-banner strong {
+            font-size: 1.5rem;
+            display: block;
+            margin-bottom: 0.75rem;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .urgency-banner span {
+            display: block;
+            font-size: 1.1rem;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+            line-height: 1.5;
+        }
+        
+        /* Social Proof */
+        .social-proof {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2.5rem 2rem;
+            border-radius: 1.5rem;
+            margin: 2rem 0;
+            text-align: center;
+            border: 2px solid rgba(30, 64, 175, 0.1);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            animation: fadeInUp 1.6s ease-out 1s both;
+        }
+        
+        .social-proof:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(30, 64, 175, 0.12);
+            border-color: rgba(30, 64, 175, 0.2);
+        }
+        
+        .social-proof-text {
+            font-size: 1.25rem;
+            color: var(--text);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            border-radius: 18px;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 8px 24px rgba(30, 64, 175, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-icon:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 12px 32px rgba(30, 64, 175, 0.3);
+        }
+        
+        .expertise-item {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 1.25rem;
+            border: 2px solid rgba(30, 64, 175, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .expertise-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #1e40af, #3b82f6);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+        
+        .expertise-item:hover {
+            background: rgba(255, 255, 255, 0.95);
+            transform: translateX(12px);
+            box-shadow: 0 8px 24px rgba(30, 64, 175, 0.15);
+            border-color: rgba(30, 64, 175, 0.3);
+        }
+        
+        .expertise-item:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .expertise-item div[style*="font-size"] {
+            font-size: 1.75rem !important;
+            transition: transform 0.3s ease;
+        }
+        
+        .expertise-item:hover div[style*="font-size"] {
+            transform: scale(1.2) rotate(10deg);
+        }
+        
+        .modern-feature {
+            text-align: center;
+            padding: 2.5rem 2rem;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 1.25rem;
+            border: 2px solid rgba(30, 64, 175, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .modern-feature::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #1e40af, #3b82f6);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+        
+        .modern-feature:hover {
+            background: rgba(255, 255, 255, 0.95);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 16px 40px rgba(30, 64, 175, 0.15);
+            border-color: rgba(30, 64, 175, 0.3);
+        }
+        
+        .modern-feature:hover::before {
+            transform: scaleX(1);
+        }
+        
+        /* Enhanced Button Styles */
+        #assetSubmitBtn {
+            position: relative;
+            z-index: 10;
+        }
+        
+        #assetSubmitBtn::before {
+            display: none !important;
+        }
+        
+        #assetSubmitBtn::after {
+            display: none !important;
+        }
+        
+        @media (max-width: 768px) {
+            .trust-badges {
+                gap: 2rem;
+                padding: 2rem 1.5rem;
+            }
+            
+            .service-categories {
+                grid-template-columns: 1fr;
+                gap: 1.25rem;
+            }
+            
+            .process-timeline {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-content h2 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-description {
+                font-size: 1.25rem;
+            }
+            
+            .guarantee-badge {
+                padding: 2rem 1.5rem;
+            }
+            
+            .guarantee-badge h3 {
+                font-size: 1.75rem;
+            }
+            
+            .guarantee-badge p {
+                font-size: 1.1rem;
+            }
+            
+            .metric-card {
+                padding: 2rem 1.5rem;
+            }
+            
+            .metric-value {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1 data-company-name style="background: linear-gradient(135deg, #1e40af, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Aesus Asset Reclaim</h1>
+                <p data-slogan>Asset recovery & financial investigations</p>
+            </div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="services.html" class="nav-link">Services</a>
+                <a href="process.html" class="nav-link">About Us</a>
+                <a href="asset-reclaim.html" class="nav-link active">Contact Us</a>
+                <a href="client-login.html" class="nav-link">Client Login</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <section class="hero">
+            <div class="container">
+                <!-- Enhanced Hero Section -->
+                <div class="hero-content">
+                    <h2>Recover What's Rightfully Yours</h2>
+                    <p class="hero-description">
+                        Expert asset recovery services with a <strong>100% free assessment</strong> and <strong>no win, no fee</strong> guarantee. 
+                        Our team specializes in recovering lost, unclaimed, or misappropriated assets with complete transparency and confidentiality.
+                    </p>
+                    
+                    <!-- Trust Badges -->
+                    <div class="trust-badges">
+                        <div class="trust-badge">
+                            <div class="trust-badge-number" data-stat="assetsRecovered">£2.5M+</div>
+                            <div class="trust-badge-label">Recovered</div>
+                        </div>
+                        <div class="trust-badge">
+                            <div class="trust-badge-number" data-stat="successCases">1,200+</div>
+                            <div class="trust-badge-label">Successful Cases</div>
+                        </div>
+                        <div class="trust-badge">
+                            <div class="trust-badge-number" data-stat="averageResponse">24hrs</div>
+                            <div class="trust-badge-label">Response Time</div>
+                        </div>
+                        <div class="trust-badge">
+                            <div class="trust-badge-number" data-stat="successRate">98%</div>
+                            <div class="trust-badge-label">Success Rate</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- No Win No Fee Guarantee -->
+                <div class="guarantee-badge" style="margin-bottom: 3rem;">
+                    <h3>No Win, No Fee Guarantee</h3>
+                    <p>100% free assessment. We only get paid when you recover your assets. No hidden fees, no upfront costs, completely risk-free.</p>
+                </div>
+
+                <!-- Form Card - Centered -->
+                <div style="display: flex; justify-content: center; margin: 3rem 0;">
+                    <div class="card" style="animation-delay: 0.3s; max-width: 900px; width: 100%; margin-bottom: 4rem; position: relative; z-index: 10;">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;">
+                            <h3 style="margin: 0;">Start Your Asset Reclaim Case</h3>
+                        </div>
+                        <p class="card-description" style="margin-bottom: 1.5rem;">
+                            <strong>100% Free Assessment</strong> - No obligation, no hidden fees. Get expert evaluation of your case in 24 hours.
+                        </p>
+                        
+                        <form id="assetReclaimForm" class="contact-form" enctype="multipart/form-data" style="position: relative; z-index: 100;">
+                            <div class="form-group">
+                                <label style="font-weight: 600; margin-bottom: 0.5rem; color: var(--text); font-size: 0.9rem;">Company / Owner *</label>
+                                <input type="text" name="company" placeholder="Company or individual name" required style="padding: 1rem 1.25rem; border: 2px solid var(--border); border-radius: 0.75rem; font-size: 1rem; position: relative; z-index: 100; background: white; pointer-events: auto;">
+                            </div>
+
+                            <div class="form-group" style="position: relative; z-index: 100;">
+                                <label style="font-weight: 600; margin-bottom: 0.5rem; color: var(--text); font-size: 0.9rem;">Contact Name *</label>
+                                <input type="text" name="contactName" placeholder="Your full name" required style="padding: 1rem 1.25rem; border: 2px solid var(--border); border-radius: 0.75rem; font-size: 1rem; background: white; pointer-events: auto;">
+                            </div>
+
+                            <div class="form-group" style="position: relative; z-index: 100;">
+                                <label style="font-weight: 600; margin-bottom: 0.5rem; color: var(--text); font-size: 0.9rem;">Email Address *</label>
+                                <input type="email" name="email" placeholder="your.email@company.com" required style="padding: 1rem 1.25rem; border: 2px solid var(--border); border-radius: 0.75rem; font-size: 1rem; background: white; pointer-events: auto;">
+                            </div>
+
+                            <div class="form-group" style="position: relative; z-index: 100;">
+                                <label style="font-weight: 600; margin-bottom: 0.5rem; color: var(--text); font-size: 0.9rem;">Phone Number *</label>
+                                <input type="tel" name="phone" placeholder="+1 (555) 123-4567" required style="padding: 1rem 1.25rem; border: 2px solid var(--border); border-radius: 0.75rem; font-size: 1rem; background: white; pointer-events: auto;">
+                                <small style="font-size: 0.75rem; color: var(--text-light); margin-top: 0.25rem;">We'll contact you within 24 hours</small>
+                            </div>
+
+                            <div class="form-group" style="position: relative; z-index: 100;">
+                                <label style="font-weight: 600; margin-bottom: 0.5rem; color: var(--text); font-size: 0.9rem;">Asset / Property Address</label>
+                                <input type="text" name="propertyAddress" placeholder="Full address of the asset/property (if applicable)" style="padding: 1rem 1.25rem; border: 2px solid var(--border); border-radius: 0.75rem; font-size: 1rem; background: white; pointer-events: auto;">
+                            </div>
+
+                            <div class="form-group" style="position: relative; z-index: 100;">
+                                <label style="font-weight: 600; margin-bottom: 0.5rem; color: var(--text); font-size: 0.9rem;">Case Details *</label>
+                                <textarea name="details" rows="6" placeholder="Please provide detailed information about the asset, circumstances, estimated value, and any relevant background information..." required style="padding: 1rem 1.25rem; border: 2px solid var(--border); border-radius: 0.75rem; font-size: 1rem; font-family: inherit; resize: vertical; background: white; pointer-events: auto;"></textarea>
+                            </div>
+
+                            <div class="form-group" style="position: relative; z-index: 100;">
+                                <label style="font-weight: 600; margin-bottom: 0.5rem; color: var(--text); font-size: 0.9rem;">Supporting Documents (Optional)</label>
+                                <input type="file" name="files" multiple accept=".pdf,.jpg,.jpeg,.png" style="padding: 0.75rem; border: 2px dashed var(--border); border-radius: 0.5rem; background: var(--background); pointer-events: auto;">
+                                <div id="assetFileList" class="file-list">No files selected</div>
+                                <small class="file-hint">Max 5 files, 10MB each. PDF, JPG, PNG formats accepted.</small>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary" id="assetSubmitBtn" style="
+                                background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+                                color: white;
+                                border: none;
+                                width: 100%;
+                                padding: 1.5rem 2rem;
+                                font-size: 1.15rem;
+                                box-shadow: 0 8px 24px rgba(30, 64, 175, 0.35);
+                                font-weight: 700;
+                                position: relative;
+                                overflow: visible;
+                                transition: all 0.3s ease;
+                                cursor: pointer;
+                                display: block;
+                                font-family: inherit;
+                            ">
+                                <span class="btn-text">Get Free Assessment - No Obligation</span>
+                                <span class="btn-loading" style="display: none;">Processing...</span>
+                            </button>
+                            
+                            <div style="text-align: center; margin-top: 1rem; font-size: 0.85rem; color: var(--text-light);">
+                                ✅ 100% Free • ✅ No Win No Fee • ✅ 24hr Response
+                            </div>
+                            
+                            <div id="assetReclaimStatus" class="form-status" aria-live="polite"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Back to Home Button - Last element before footer -->
+    <div style="text-align: center; margin: 4rem 0 2rem; padding: 0 1rem;">
+        <a href="index.html" class="btn btn-secondary" style="padding: 1rem 2rem; font-size: 1rem; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+            ← Back to Home
+        </a>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; <span data-current-year></span> <span data-company-name>Aesus Asset Reclaim</span>. All rights reserved. | Confidentiality Guaranteed</p>
+            <p style="margin-top: 1rem; font-size: 0.875rem;">
+                <a href="privacy-policy.html" id="privacyLink" style="color: var(--text-light); text-decoration: none; margin-right: 1rem; transition: color 0.2s;">Privacy Policy</a>
+                <a href="terms-of-service.html" id="termsLink" style="color: var(--text-light); text-decoration: none; transition: color 0.2s;">Terms of Service</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Asset Reclaim Form Handler
+        class AssetReclaimForm {
+            constructor() {
+                this.form = document.getElementById('assetReclaimForm');
+                this.status = document.getElementById('assetReclaimStatus');
+                this.fileInput = this.form.querySelector('input[type="file"]');
+                this.fileList = document.getElementById('assetFileList');
+                this.submitBtn = document.getElementById('assetSubmitBtn');
+                this.btnText = this.submitBtn.querySelector('.btn-text');
+                this.btnLoading = this.submitBtn.querySelector('.btn-loading');
+                
+                this.init();
+            }
+
+            init() {
+                this.form.addEventListener('submit', (e) => this.handleSubmit(e));
+                this.fileInput.addEventListener('change', (e) => this.handleFileSelect(e));
+            }
+
+            handleFileSelect(e) {
+                const files = Array.from(e.target.files);
+                const errors = this.validateFiles(files);
+                
+                if (errors.length > 0) {
+                    alert('Please fix file errors:\n' + errors.join('\n'));
+                    e.target.value = '';
+                    this.updateFileList([]);
+                    return;
+                }
+                
+                this.updateFileList(files);
+            }
+
+            validateFiles(files, maxSize = 10 * 1024 * 1024) {
+                const errors = [];
+                const allowedTypes = [
+                    'image/jpeg', 'image/png', 'image/gif',
+                    'application/pdf'
+                ];
+
+                for (let file of files) {
+                    if (file.size > maxSize) {
+                        errors.push(`"${file.name}" exceeds 10MB limit`);
+                    }
+                    
+                    if (!allowedTypes.includes(file.type)) {
+                        errors.push(`"${file.name}" - file type not supported`);
+                    }
+                }
+
+                return errors;
+            }
+
+            updateFileList(files) {
+                if (files.length === 0) {
+                    this.fileList.textContent = 'No files selected';
+                    this.fileList.className = 'file-list';
+                    return;
+                }
+
+                const fileNames = files.map(f => f.name).join(', ');
+                this.fileList.textContent = `Selected: ${files.length} file(s) - ${fileNames}`;
+                this.fileList.className = 'file-list has-files';
+            }
+
+            async handleSubmit(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(this.form);
+                const files = Array.from(this.fileInput.files);
+
+                const fileErrors = this.validateFiles(files);
+                if (fileErrors.length > 0) {
+                    this.setStatus('error', 'Please fix file errors before submitting.');
+                    return;
+                }
+
+                this.setLoading(true);
+                this.setStatus('sending', 'Submitting your asset reclaim case... Our team will review within 24 hours.');
+
+                try {
+                    const response = await fetch('http://localhost:3001/api/asset-reclaim', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                    console.log('Form submission response status:', response.status);
+                    const data = await response.json();
+                    console.log('Form submission response data:', data);
+
+                    if (!response.ok) {
+                        throw new Error(data.error || `Server error: ${response.status}`);
+                    }
+
+                    if (data.ok) {
+                        this.setStatus('success', 
+                            `✅ Asset reclaim case ${data.caseId} submitted successfully!\n\n` +
+                            `We've sent a confirmation email and will review your case within 24 hours. ` +
+                            `You'll receive a detailed assessment with recovery probability and next steps.`
+                        );
+                        this.form.reset();
+                        this.updateFileList([]);
+                        
+                        setTimeout(() => {
+                            this.clearStatus();
+                        }, 10000);
+                    } else {
+                        throw new Error(data.error || 'Submission failed');
+                    }
+                } catch (error) {
+                    console.error('Asset reclaim form submission error:', error);
+                    console.error('Error details:', {
+                        message: error.message,
+                        stack: error.stack,
+                        name: error.name
+                    });
+                    this.setStatus('error', 
+                        `❌ Submission failed: ${error.message}. Please try again or contact us directly.`
+                    );
+                } finally {
+                    this.setLoading(false);
+                }
+            }
+
+            setLoading(loading) {
+                if (loading) {
+                    this.submitBtn.disabled = true;
+                    this.btnText.style.display = 'none';
+                    this.btnLoading.style.display = 'inline-block';
+                } else {
+                    this.submitBtn.disabled = false;
+                    this.btnText.style.display = 'inline-block';
+                    this.btnLoading.style.display = 'none';
+                }
+            }
+
+            setStatus(type, message) {
+                this.status.textContent = message;
+                this.status.className = `form-status status-${type}`;
+                this.status.style.display = 'block';
+            }
+
+            clearStatus() {
+                this.status.textContent = '';
+                this.status.className = 'form-status';
+                this.status.style.display = 'none';
+            }
+        }
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize icons
+            if (window.initAllIcons) {
+                setTimeout(() => window.initAllIcons(), 100);
+            }
+            
+            new AssetReclaimForm();
+            // Year is now handled by siteConfig.js
+            
+            // Add hover effects to footer links
+            const privacyLink = document.getElementById('privacyLink');
+            const termsLink = document.getElementById('termsLink');
+            
+            if (privacyLink) {
+                privacyLink.addEventListener('mouseenter', function() {
+                    this.style.color = 'var(--primary)';
+                });
+                privacyLink.addEventListener('mouseleave', function() {
+                    this.style.color = 'var(--text-light)';
+                });
+            }
+            
+            if (termsLink) {
+                termsLink.addEventListener('mouseenter', function() {
+                    this.style.color = 'var(--primary)';
+                });
+                termsLink.addEventListener('mouseleave', function() {
+                    this.style.color = 'var(--text-light)';
+                });
+            }
+            
+            console.log('Asset reclaim form page initialized');
+        });
+    </script>
+</body>
+</html>

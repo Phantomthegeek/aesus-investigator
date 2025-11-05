@@ -1,0 +1,87 @@
+[
+  {
+    "caseId": "AR-24EEC9D7634F",
+    "company": "Biggi",
+    "contactName": "Adetomiwa Adetoro",
+    "email": "adetoroadunoluwa@gmail.com",
+    "phone": "07541506334",
+    "propertyAddress": "64, Duva Hill, Luton",
+    "details": "You sabi",
+    "files": [],
+    "createdAt": "2025-11-02T14:25:40.801Z",
+    "status": "new",
+    "updates": []
+  },
+  {
+    "caseId": "AR-07EBD7F56113",
+    "company": "Biggi",
+    "contactName": "Adetomiwa Adetoro",
+    "email": "adetoroadunoluwa28@gmail.com",
+    "phone": "07541506334",
+    "propertyAddress": "you sabi",
+    "details": "hdluhgk",
+    "files": [],
+    "createdAt": "2025-11-02T14:27:16.856Z",
+    "status": "on-hold",
+    "updates": [
+      {
+        "date": "2025-11-02T14:47:02.816Z",
+        "message": "Status changed to on-hold",
+        "status": "on-hold"
+      }
+    ],
+    "updatedAt": "2025-11-02T14:47:02.816Z"
+  },
+  {
+    "caseId": "AR-311240ECB5AA",
+    "company": "Biggi",
+    "contactName": "Adetomiwa Adetoro",
+    "email": "adetoroadunoluwa28@gmail.com",
+    "phone": "07541506334",
+    "propertyAddress": "64, Duva Hill, Luton",
+    "details": "You sabi",
+    "files": [],
+    "createdAt": "2025-11-02T14:34:16.215Z",
+    "status": "in-progress",
+    "updates": [
+      {
+        "date": "2025-11-02T14:46:57.955Z",
+        "message": "Status changed to in-progress",
+        "status": "in-progress"
+      },
+      {
+        "date": "2025-11-02T14:49:12.626Z",
+        "message": "Hello Adetomiwa",
+        "status": null
+      }
+    ],
+    "updatedAt": "2025-11-02T14:49:12.632Z",
+    "clientReplies": [
+      {
+        "date": "2025-11-02T14:48:42.009Z",
+        "message": "Hii admin",
+        "from": "client"
+      }
+    ]
+  },
+  {
+    "caseId": "AR-5D09135ADAEE",
+    "company": "Biggi",
+    "contactName": "Adetomiwa Adetoro",
+    "email": "adetoroadunoluwa28@gmail.com",
+    "phone": "07541506334",
+    "propertyAddress": "64, Duva Hill, Luton",
+    "details": "you sabi",
+    "files": [],
+    "createdAt": "2025-11-02T14:40:47.948Z",
+    "status": "completed",
+    "updates": [
+      {
+        "date": "2025-11-02T14:46:52.453Z",
+        "message": "Status changed to completed",
+        "status": "completed"
+      }
+    ],
+    "updatedAt": "2025-11-02T14:46:52.453Z"
+  }
+]
