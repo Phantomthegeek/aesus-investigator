@@ -1,78 +1,130 @@
-/* Reset and base styles */
+/**
+ * styles.css - Global Stylesheet for Aesus Asset Reclaim
+ * 
+ * This file contains all global styles, CSS variables, and reusable components
+ * used across the entire website. It follows a mobile-first responsive design approach.
+ * 
+ * Structure:
+ * 1. CSS Reset & Base Styles
+ * 2. CSS Variables (Design Tokens)
+ * 3. Layout Components (Header, Footer, Container)
+ * 4. UI Components (Cards, Buttons, Forms)
+ * 5. Animations & Transitions
+ * 6. Responsive Breakpoints
+ */
+
+/* ============================================================================
+   CSS RESET & BASE STYLES
+   ============================================================================
+   Resets default browser styles for consistent rendering across all browsers
+*/
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box; /* Includes padding and border in element width */
 }
 
+/* ============================================================================
+   CSS VARIABLES (DESIGN TOKENS)
+   ============================================================================
+   Centralized color scheme and design values. Change these to update the entire site theme.
+   These variables are used throughout the stylesheet for consistency.
+*/
 :root {
-    --primary: #1e40af;
-    --primary-dark: #1e3a8a;
-    --primary-light: #3b82f6;
-    --secondary: #64748b;
-    --success: #059669;
-    --error: #dc2626;
-    --warning: #d97706;
-    --background: #f8fafc;
-    --surface: #ffffff;
-    --text: #1e293b;
-    --text-light: #64748b;
-    --text-muted: #94a3b8;
-    --border: #e2e8f0;
-    --border-light: #f1f5f9;
-    --shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
-    --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
-    --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
-    --gradient-primary: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
-    --gradient-surface: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    /* Primary Brand Colors - Blue gradient theme */
+    --primary: #1e40af;           /* Main brand blue (dark) */
+    --primary-dark: #1e3a8a;      /* Darker blue for hover states */
+    --primary-light: #3b82f6;     /* Lighter blue for accents */
+    
+    /* Secondary Colors */
+    --secondary: #64748b;         /* Gray for secondary text */
+    --success: #059669;            /* Green for success messages */
+    --error: #dc2626;              /* Red for error messages */
+    --warning: #d97706;            /* Orange for warnings */
+    
+    /* Background & Surface Colors */
+    --background: #f8fafc;         /* Main page background (light gray) */
+    --surface: #ffffff;             /* Card/container background (white) */
+    
+    /* Text Colors */
+    --text: #1e293b;               /* Primary text color (dark gray) */
+    --text-light: #64748b;         /* Secondary text (medium gray) */
+    --text-muted: #94a3b8;         /* Muted/disabled text (light gray) */
+    
+    /* Border Colors */
+    --border: #e2e8f0;             /* Standard border color */
+    --border-light: #f1f5f9;       /* Light border for subtle dividers */
+    
+    /* Shadow Presets - Elevation system */
+    --shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);        /* Small shadow */
+    --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);  /* Large shadow */
+    --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04); /* Extra large shadow */
+    
+    /* Gradient Presets */
+    --gradient-primary: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);  /* Primary brand gradient */
+    --gradient-surface: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);   /* Subtle surface gradient */
 }
 
+/* ============================================================================
+   BODY & BASE TYPOGRAPHY
+   ============================================================================ */
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
     background-color: var(--background);
     color: var(--text);
-    line-height: 1.6;
-    position: relative;
+    line-height: 1.6;              /* Improved readability */
+    position: relative;              /* For absolute positioned children */
 }
 
-/* Modern animated background for main pages */
+/* Animated Background Gradient
+   Creates a subtle animated gradient background on all pages.
+   Uses pseudo-element to avoid affecting page content z-index.
+*/
 body::before {
     content: '';
-    position: fixed;
+    position: fixed;                /* Fixed to viewport, doesn't scroll */
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 15%, #1e40af 50%, #3b82f6 85%, #667eea 100%);
-    background-size: 400% 400%;
-    animation: gradientShift 20s ease infinite;
-    z-index: -2;
-    opacity: 0.05;
+    background-size: 400% 400%;     /* Larger than viewport for animation */
+    animation: gradientShift 20s ease infinite;  /* Continuous animation */
+    z-index: -2;                    /* Behind all content */
+    opacity: 0.05;                  /* Very subtle, not distracting */
 }
 
+/* Background Animation Keyframes
+   Shifts the gradient position to create a flowing effect
+*/
 @keyframes gradientShift {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
+/* ============================================================================
+   LAYOUT COMPONENTS
+   ============================================================================ */
+
+/* Container - Centers content and sets max-width for readability */
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
+    max-width: 1200px;              /* Maximum content width */
+    margin: 0 auto;                 /* Center horizontally */
+    padding: 0 1rem;                /* Horizontal padding on mobile */
 }
 
-/* Header */
+/* Header - Sticky navigation bar at top of page */
 .header {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(20px);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    background: rgba(255, 255, 255, 0.95);  /* Semi-transparent white */
+    backdrop-filter: blur(20px);             /* Blur effect for glassmorphism */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);  /* Subtle shadow for depth */
     padding: 1.25rem 0;
-    position: sticky;
+    position: sticky;                /* Stays at top when scrolling */
     top: 0;
-    z-index: 100;
+    z-index: 100;                    /* Above most content */
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    transition: all 0.3s ease;
+    transition: all 0.3s ease;       /* Smooth transitions */
 }
 
 .header .container {
@@ -207,6 +259,8 @@ body::before {
     right: 0;
     height: 4px;
     background: var(--gradient-primary);
+    pointer-events: none;
+    z-index: 1;
 }
 
 .card::after {
@@ -219,6 +273,8 @@ body::before {
     background: radial-gradient(circle, rgba(30, 64, 175, 0.05) 0%, transparent 70%);
     opacity: 0;
     transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 0;
 }
 
 .card:hover {
@@ -537,133 +593,649 @@ body::before {
 
 /* Footer */
 .footer {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(20px);
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 3rem 0;
-    text-align: center;
-    color: var(--text-light);
-    margin-top: 4rem;
-    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    color: #e2e8f0;
+    margin-top: 6rem;
+    position: relative;
+    overflow: hidden;
 }
 
-.footer p {
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #1e40af, #3b82f6, #8b5cf6, #1e40af);
+    background-size: 200% 100%;
+    animation: gradientShift 3s ease infinite;
+}
+
+.footer .container {
+    position: relative;
+    z-index: 1;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 3rem;
+    padding: 4rem 0 2rem;
+}
+
+.footer-column h4 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-bottom: 0.75rem;
+}
+
+.footer-column h4::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+    border-radius: 2px;
+}
+
+.footer-column p {
+    font-size: 0.95rem;
+    color: #cbd5e1;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 0.875rem;
+}
+
+.footer-column a {
+    color: #cbd5e1;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.footer-column a:hover {
+    color: #3b82f6;
+    transform: translateX(4px);
+}
+
+.footer-column a[href^="mailto:"]:hover,
+.footer-column a[href^="tel:"]:hover {
+    color: #60a5fa;
+}
+
+.footer-contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    padding: 0.5rem 0;
+    transition: all 0.3s ease;
+}
+
+.footer-contact-item:hover {
+    transform: translateX(4px);
+}
+
+.footer-contact-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(139, 92, 246, 0.2));
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.125rem;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.footer-contact-item:hover .footer-contact-icon {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.3), rgba(139, 92, 246, 0.3));
+    transform: scale(1.1);
+}
+
+.footer-contact-text {
+    color: #cbd5e1;
+    font-size: 0.95rem;
+}
+
+.footer-contact-item a {
+    color: #cbd5e1;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-contact-item:hover a {
+    color: #60a5fa;
+}
+
+.footer-services-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-services-list li {
+    color: #cbd5e1;
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem;
+    padding-left: 1.25rem;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.footer-services-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #3b82f6;
+    font-weight: 700;
     font-size: 0.875rem;
-    font-weight: 500;
 }
 
-/* Responsive */
+.footer-services-list li:hover {
+    color: #ffffff;
+    transform: translateX(4px);
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2rem 0;
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.footer-bottom p {
+    color: #94a3b8;
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.footer-links a {
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 0.5rem 0;
+}
+
+.footer-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+    transition: width 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #ffffff;
+}
+
+.footer-links a:hover::after {
+    width: 100%;
+}
+
+.footer-company-name {
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+}
+
 @media (max-width: 768px) {
-    .header .container {
-        flex-direction: column;
-        text-align: center;
-        gap: 1.5rem;
-        padding: 0 0.75rem;
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        padding: 3rem 0 1.5rem;
     }
     
-    .nav {
+    .footer-links {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .footer-contact-item {
+        flex-direction: column;
+        align-items: flex-start;
         gap: 0.5rem;
-        flex-wrap: wrap;
-        justify-content: center;
+    }
+}
+
+/* ============================================================================
+   MOBILE RESPONSIVE STYLES
+   ============================================================================
+   Mobile-first responsive design for tablets and phones
+*/
+
+/* Mobile Menu Toggle Button */
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: 2px solid transparent;
+    font-size: 1.75rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    color: var(--text);
+    min-width: 44px;
+    min-height: 44px;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(30, 64, 175, 0.2);
+    position: relative;
+    z-index: 101;
+}
+
+.mobile-menu-toggle:hover {
+    background: rgba(30, 64, 175, 0.1);
+    border-color: rgba(30, 64, 175, 0.2);
+}
+
+.mobile-menu-toggle:active {
+    transform: scale(0.95);
+    background: rgba(30, 64, 175, 0.2);
+}
+
+.mobile-menu-toggle:focus {
+    outline: 3px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+/* Responsive - Tablets and Mobile */
+@media (max-width: 768px) {
+    /* Header improvements for mobile */
+    .header {
+        padding: 1rem 0;
+    }
+    
+    .header .container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 1rem;
+        gap: 1rem;
+    }
+    
+    /* Show mobile menu toggle */
+    .mobile-menu-toggle {
+        display: block;
+        order: 3;
+    }
+    
+    /* Header needs relative positioning for absolute nav */
+    .header {
+        position: relative;
+    }
+    
+    /* Hide desktop nav, show mobile nav */
+    .nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px); /* Safari support */
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        flex-direction: column;
+        gap: 0;
+        padding: 0;
+        margin-top: 0.5rem;
+        border-radius: 0 0 1rem 1rem;
+        z-index: 99;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                    padding 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                    opacity 0.3s ease;
+        opacity: 0;
+    }
+    
+    /* Show nav when active */
+    .nav.active {
+        display: flex;
+        max-height: 500px;
+        padding: 0.5rem 0;
+        opacity: 1;
     }
     
     .nav-link {
-        padding: 0.75rem 1rem;
-        font-size: 0.8rem;
-        min-height: 44px; /* Mobile-friendly tap target */
+        padding: 1rem 1.5rem;
+        font-size: 0.95rem;
+        min-height: 48px; /* Larger tap target for mobile */
         display: flex;
         align-items: center;
-    }
-    
-    .hero-content h2 {
-        font-size: 2.25rem;
-    }
-    
-    .hero-description {
-        font-size: 1.125rem;
-    }
-    
-    .card {
-        padding: 2rem;
-        margin: 0 0.5rem;
-    }
-    
-    .card h3 {
-        font-size: 1.5rem;
-    }
-    
-    .features {
-        grid-template-columns: 1fr;
-    }
-    
-    .btn {
-        padding: 0.875rem 1.5rem;
-        font-size: 0.875rem;
-        min-height: 44px; /* Mobile-friendly tap target */
         width: 100%;
-        max-width: 300px;
-        margin: 0 auto;
-        display: block;
+        border-radius: 0;
+        margin: 0;
+        touch-action: manipulation;
     }
     
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-        padding: 0.875rem;
-        font-size: 16px; /* Prevents zoom on iOS */
+    .nav-link:hover {
+        background: rgba(30, 64, 175, 0.1);
+        transform: none; /* Remove transform on mobile */
     }
     
-    .container {
-        padding: 0 0.75rem;
+    /* Logo adjustments */
+    .logo {
+        flex: 1;
+        text-align: left;
     }
     
-    /* Mobile menu improvements */
     .logo h1 {
         font-size: 1.5rem;
+        margin-bottom: 0.125rem;
     }
     
     .logo p {
         font-size: 0.8rem;
     }
     
+    /* Hero section mobile optimizations */
+    .hero {
+        padding: 2rem 0 1.5rem;
+    }
+    
+    .hero-content {
+        margin-bottom: 2rem;
+    }
+    
+    .hero-content h2 {
+        font-size: 2rem;
+        line-height: 1.2;
+        margin-bottom: 1rem;
+    }
+    
+    .hero-description {
+        font-size: 1.125rem;
+        padding: 0 0.5rem;
+    }
+    
+    /* Card improvements for mobile */
+    .card {
+        padding: 1.5rem;
+        margin: 0;
+        border-radius: 1rem;
+    }
+    
+    .card h3 {
+        font-size: 1.375rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .card p {
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+    
+    /* Grid layouts - single column on mobile */
+    .features,
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    /* Button improvements */
+    .btn {
+        padding: 1rem 1.5rem;
+        font-size: 1rem;
+        min-height: 48px; /* Larger tap target */
+        width: 100%;
+        max-width: 100%;
+        margin: 0.5rem 0;
+        display: block;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: rgba(30, 64, 175, 0.2);
+    }
+    
+    /* Form improvements for mobile */
+    .form-group {
+        margin-bottom: 1.25rem;
+    }
+    
+    .form-group label {
+        font-size: 0.95rem;
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        padding: 1rem;
+        font-size: 16px; /* Prevents zoom on iOS when focusing */
+        border-radius: 0.75rem;
+        width: 100%;
+        min-height: 48px; /* Larger tap target */
+        -webkit-appearance: none; /* Remove iOS styling */
+        appearance: none;
+        touch-action: manipulation;
+    }
+    
+    .form-group textarea {
+        min-height: 120px;
+        resize: vertical;
+    }
+    
+    /* Container padding */
+    .container {
+        padding: 0 1rem;
+    }
+    
     /* Prevent horizontal scroll */
     body {
         overflow-x: hidden;
+        -webkit-text-size-adjust: 100%; /* Prevent text scaling on iOS */
     }
     
     /* Improve touch targets for all interactive elements */
-    button, .btn, .nav-link, .service-category, .trust-badge, .faq-item {
+    button, 
+    .btn, 
+    .nav-link, 
+    .service-category, 
+    .trust-badge, 
+    .faq-item,
+    a[role="button"],
+    input[type="submit"],
+    input[type="button"] {
         min-height: 44px;
-        touch-action: manipulation; /* Removes double-tap delay */
+        min-width: 44px;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: rgba(30, 64, 175, 0.2);
+    }
+    
+    /* Section spacing */
+    section {
+        padding: 2rem 0;
+    }
+    
+    /* Improve readability */
+    p, li {
+        font-size: 1rem;
+        line-height: 1.7;
+    }
+    
+    /* Table improvements for mobile */
+    table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        width: 100%;
+        font-size: 0.875rem;
+    }
+    
+    th, td {
+        padding: 0.75rem 0.5rem;
+        white-space: nowrap;
+    }
+    
+    /* Image optimizations for mobile */
+    img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+    }
+    
+    /* Better spacing for mobile sections */
+    .section {
+        padding: 2rem 0;
+    }
+    
+    /* Improve list spacing on mobile */
+    ul, ol {
+        padding-left: 1.5rem;
+    }
+    
+    li {
+        margin-bottom: 0.5rem;
+    }
+    
+    /* Footer mobile improvements */
+    .footer {
+        margin-top: 3rem;
+    }
+    
+    /* Improve card grid on mobile */
+    .card-grid,
+    .service-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    /* Better spacing for testimonials */
+    .testimonial {
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    /* Improve FAQ on mobile */
+    .faq-item {
+        margin-bottom: 1rem;
+    }
+    
+    .faq-question {
+        padding: 1rem;
+        font-size: 0.95rem;
+    }
+    
+    .faq-answer {
+        padding: 0 1rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    /* Better button groups on mobile */
+    .btn-group {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .btn-group .btn {
+        width: 100%;
+        margin: 0.25rem 0;
+    }
+    
+    /* Improve modals on mobile */
+    .modal-content {
+        width: 95%;
+        max-width: 95%;
+        margin: 1rem auto;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    
+    /* Better input groups */
+    .input-group {
+        flex-direction: column;
+    }
+    
+    .input-group input,
+    .input-group select {
+        width: 100%;
+        margin-bottom: 0.5rem;
     }
 }
 
+/* Extra Small Mobile Devices (phones in portrait) */
 @media (max-width: 480px) {
     .container {
         padding: 0 0.75rem;
     }
     
+    /* Hero section for small phones */
     .hero {
-        padding: 3rem 0 2rem;
+        padding: 1.5rem 0 1rem;
     }
     
     .hero-content h2 {
-        font-size: 1.875rem;
+        font-size: 1.75rem;
+        line-height: 1.2;
+        margin-bottom: 0.75rem;
     }
     
+    .hero-description {
+        font-size: 1rem;
+        padding: 0;
+    }
+    
+    /* Cards for small screens */
     .card {
-        padding: 1.5rem;
-        border-radius: 1rem;
+        padding: 1.25rem;
+        border-radius: 0.875rem;
+        margin-bottom: 1rem;
     }
     
+    .card h3 {
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .card p {
+        font-size: 0.9rem;
+    }
+    
+    /* Navigation for small screens */
     .nav-link {
-        padding: 0.5rem 0.75rem;
-        font-size: 0.8rem;
-        min-height: 40px;
+        padding: 0.875rem 1.25rem;
+        font-size: 0.9rem;
+        min-height: 44px;
     }
     
+    /* Logo for small screens */
     .logo h1 {
         font-size: 1.25rem;
+        margin-bottom: 0.125rem;
     }
     
     .logo p {
@@ -671,31 +1243,113 @@ body::before {
     }
     
     .header {
-        padding: 1rem 0;
+        padding: 0.875rem 0;
     }
     
-    /* Improve button sizing on very small screens */
+    /* Buttons for small screens */
     .btn {
-        padding: 0.75rem 1.25rem;
-        font-size: 0.9rem;
-        min-height: 40px;
+        padding: 0.875rem 1.25rem;
+        font-size: 0.95rem;
+        min-height: 44px;
     }
     
-    /* Better spacing for mobile */
+    /* Better spacing */
     .grid {
-        gap: 1.5rem;
+        gap: 1.25rem;
     }
     
-    /* Ensure text remains readable */
+    section {
+        padding: 1.5rem 0;
+    }
+    
+    /* Typography for small screens */
     body {
         font-size: 0.95rem;
     }
     
+    h1 {
+        font-size: 1.75rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+    
+    h3 {
+        font-size: 1.25rem;
+    }
+    
     /* Prevent text overflow */
     .card h3,
-    .hero-content h2 {
+    .hero-content h2,
+    h1, h2, h3, h4 {
         word-wrap: break-word;
         overflow-wrap: break-word;
+        hyphens: auto;
+    }
+    
+    /* Form inputs for small screens */
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        padding: 0.875rem;
+        font-size: 16px; /* Critical: prevents zoom on iOS */
+    }
+    
+    /* Footer for small screens */
+    .footer-grid {
+        gap: 2rem;
+        padding: 2rem 0 1rem;
+    }
+    
+    .footer-column {
+        margin-bottom: 1.5rem;
+    }
+    
+    /* Improve spacing in lists */
+    ul, ol {
+        padding-left: 1.25rem;
+    }
+    
+    /* Better table handling on small screens */
+    table {
+        font-size: 0.8rem;
+    }
+    
+    th, td {
+        padding: 0.5rem 0.25rem;
+        font-size: 0.8rem;
+    }
+    
+    /* Stack table columns on very small screens if needed */
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Improve modal on very small screens */
+    .modal-content {
+        padding: 1rem;
+        border-radius: 0.75rem;
+    }
+    
+    /* Better spacing for small screens */
+    .spacing-mobile {
+        margin: 1rem 0;
+    }
+    
+    /* Improve readability on small screens */
+    blockquote {
+        padding: 1rem;
+        margin: 1rem 0;
+        font-size: 0.9rem;
+    }
+    
+    /* Better code blocks on mobile */
+    pre, code {
+        font-size: 0.85rem;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
     }
 }
 

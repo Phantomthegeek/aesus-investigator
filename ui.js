@@ -1,20 +1,53 @@
+/**
+ * ui.js
+ * Universal UI Utilities and Accessibility Enhancements
+ * 
+ * This file provides cross-page UI functionality including:
+ * - Navigation state management
+ * - Form submission handling
+ * - Accessibility enhancements
+ * - Dropdown menu management
+ * - Modal dialog handling
+ * 
+ * All functions are wrapped in IIFEs to avoid global namespace pollution
+ */
+
 (function(){
+    /**
+     * onReady(fn)
+     * Executes a function when the DOM is ready
+     * @param {Function} fn - Function to execute when DOM is ready
+     */
     function onReady(fn) {
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', fn);
         } else {
+            // DOM already loaded, execute immediately
             setTimeout(fn, 0);
         }
     }
 
+    /**
+     * closest(el, selector)
+     * Finds the closest ancestor element matching the selector
+     * Similar to Element.closest() but with better browser support
+     * @param {Element} el - Starting element
+     * @param {string} selector - CSS selector to match
+     * @returns {Element|null} - Matching ancestor or null
+     */
     function closest(el, selector) {
-        while (el && el.nodeType === 1) {
+        while (el && el.nodeType === 1) {  // nodeType 1 = ELEMENT_NODE
             if (el.matches(selector)) return el;
             el = el.parentElement;
         }
         return null;
     }
 
+    /**
+     * setNavActive()
+     * Automatically sets the active state on navigation links based on current page
+     * Compares the current URL pathname with each nav link's href
+     */
     function setNavActive() {
         try {
             var links = document.querySelectorAll('.nav a.nav-link');
@@ -31,20 +64,30 @@
         } catch (e) {}
     }
 
+    /**
+     * standardizeButtons()
+     * Ensures all buttons have proper type attributes for accessibility and form behavior
+     * Automatically detects submit buttons by text content and form context
+     */
     function standardizeButtons() {
         try {
             var buttons = document.querySelectorAll('button');
             buttons.forEach(function(btn) {
+                // Only set type if not already specified
                 if (!btn.getAttribute('type')) {
                     var text = (btn.textContent || '').toLowerCase();
+                    // Detect submit-like buttons by text content
                     var isSubmitLike = /submit|send|save|log in|sign in|track|apply|export/.test(text);
                     var inForm = !!closest(btn, 'form');
+                    
                     if (isSubmitLike) {
                         btn.setAttribute('type', 'submit');
                     } else {
+                        // Default to 'button' type to prevent accidental form submission
                         btn.setAttribute('type', inForm ? 'button' : 'button');
                     }
                 }
+                // Set ARIA attribute for accessibility
                 btn.setAttribute('aria-pressed', 'false');
             });
         } catch (e) {}
@@ -72,20 +115,32 @@
         } catch (e) {}
     }
 
+    /**
+     * preventDoubleSubmit()
+     * Prevents accidental double-submission of forms
+     * Disables submit button immediately on form submission
+     * Re-enables after 15 seconds as a safety measure
+     */
     function preventDoubleSubmit() {
         try {
             document.querySelectorAll('form').forEach(function(form) {
                 form.addEventListener('submit', function(ev) {
                     var submitBtn = form.querySelector('button[type="submit"]');
                     if (submitBtn) {
+                        // If already disabled, prevent submission
                         if (submitBtn.disabled) {
                             ev.preventDefault();
                             return;
                         }
+                        
+                        // Disable button and set loading state
                         submitBtn.disabled = true;
                         submitBtn.classList.add('is-submitting');
                         submitBtn.setAttribute('aria-disabled', 'true');
                         form.setAttribute('aria-busy', 'true');
+                        
+                        // Re-enable after 15 seconds as safety measure
+                        // (In case form submission fails silently)
                         setTimeout(function() {
                             form.removeAttribute('aria-busy');
                             if (submitBtn) {

@@ -1,28 +1,70 @@
+/**
+ * server.js - Aesus Asset Reclaim Backend Server
+ * 
+ * Express.js server providing REST API endpoints for:
+ * - Admin authentication and case management
+ * - Client authentication (OTP-based) and case tracking
+ * - Contact form submissions
+ * - Asset reclaim case submissions
+ * - File uploads and management
+ * - Email notifications
+ * - Case status updates and messaging
+ * 
+ * Security features:
+ * - JWT token authentication
+ * - Rate limiting
+ * - CORS protection
+ * - Input sanitization
+ * - File upload validation
+ * - Helmet security headers
+ */
+
+// ============================================================================
+// ENVIRONMENT CONFIGURATION
+// ============================================================================
+
 // Load environment variables from .env file
+// This allows configuration without hardcoding sensitive values
 const dotenv = require('dotenv');
+const path = require('path');                    // Path manipulation utilities (needed early for .env path)
 dotenv.config();
 
-const express = require('express');
-const multer = require('multer');
-const fs = require('fs').promises;
-const path = require('path');
-const logger = require('./logger');
 // Also load .env from the backend directory explicitly (works regardless of cwd)
+// This ensures .env is found even if server is run from different directory
 try { dotenv.config({ path: path.join(__dirname, '.env') }); } catch (_) {}
-const cors = require('cors');
-const helmet = require('helmet');
-const rateLimit = require('express-rate-limit');
-const nodemailer = require('nodemailer');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
-const { v4: uuidv4 } = require('uuid');
-const { ClientSecretCredential } = require('@azure/identity');
-const { Client } = require('@microsoft/microsoft-graph-client');
-const msal = require('@azure/msal-node');
 
+// ============================================================================
+// CORE DEPENDENCIES
+// ============================================================================
+
+const express = require('express');              // Web framework
+const multer = require('multer');                 // File upload handling
+const fs = require('fs').promises;               // File system operations (async)
+const logger = require('./logger');              // Custom logging utility
+const cors = require('cors');                    // Cross-Origin Resource Sharing
+const helmet = require('helmet');                // Security headers middleware
+const rateLimit = require('express-rate-limit'); // Rate limiting middleware
+const nodemailer = require('nodemailer');        // Email sending
+const jwt = require('jsonwebtoken');             // JSON Web Token authentication
+const bcrypt = require('bcryptjs');              // Password hashing
+const { v4: uuidv4 } = require('uuid');          // UUID generation for case IDs
+const { ClientSecretCredential } = require('@azure/identity'); // Azure authentication
+const { Client } = require('@microsoft/microsoft-graph-client'); // Microsoft Graph API
+const msal = require('@azure/msal-node');         // Microsoft Authentication Library
+
+// Initialize Express application
 const app = express();
 
-// Load SSL certificates if they exist
+// ============================================================================
+// SSL/HTTPS CONFIGURATION
+// ============================================================================
+
+/**
+ * SSL Certificate Loading
+ * Attempts to load SSL certificates for HTTPS support if available.
+ * If certificates exist in backend/ssl/, HTTPS will be enabled.
+ * Otherwise, the server runs on HTTP (development mode).
+ */
 let httpsEnabled = false;
 let httpsServer = null;
 
@@ -33,6 +75,7 @@ if (process.env.USE_HTTPS !== 'false') {
     const certPath = path.join(__dirname, 'ssl', 'cert.pem');
     const keyPath = path.join(__dirname, 'ssl', 'key.pem');
     
+    // Check if SSL certificate files exist
     if (fs.existsSync(certPath) && fs.existsSync(keyPath)) {
       const options = {
         cert: fs.readFileSync(certPath),
@@ -47,10 +90,19 @@ if (process.env.USE_HTTPS !== 'false') {
   }
 }
 
-const PORT = process.env.PORT || 3000;
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
-const JWT_SECRET = process.env.JWT_SECRET;
+// ============================================================================
+// ENVIRONMENT VARIABLES
+// ============================================================================
+
+/**
+ * Server Configuration from Environment Variables
+ * These values are loaded from .env file or use defaults for development.
+ * In production, these MUST be set in .env file.
+ */
+const PORT = process.env.PORT || 3000;                    // Server port (default: 3000)
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL;              // Admin login email
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;        // Admin login password (should be hashed)
+const JWT_SECRET = process.env.JWT_SECRET;                // Secret key for JWT token signing
 
 // CRITICAL: Require environment variables in production
 if (process.env.NODE_ENV === 'production') {
@@ -259,12 +311,19 @@ const allowedOrigins = process.env.ALLOWED_ORIGINS
   ? process.env.ALLOWED_ORIGINS.split(',').map(origin => origin.trim())
   : (process.env.NODE_ENV === 'production' 
       ? [] // No origins allowed in production unless explicitly set
-      : ['http://localhost:3000', 'http://localhost:3001', 'https://localhost:3000', 'http://localhost:8000']); // Dev defaults
+      : ['http://localhost:3000', 'http://localhost:3001', 'https://localhost:3000', 'http://localhost:8000', 'null']); // Dev defaults - 'null' allows file:// protocol
 
 app.use(cors({
   origin: function (origin, callback) {
-    // Allow requests with no origin (mobile apps, curl, Postman)
-    if (!origin) return callback(null, true);
+    // Allow requests with no origin (mobile apps, curl, Postman, file:// protocol)
+    if (!origin || origin === 'null') return callback(null, true);
+    
+    // In development, allow all localhost origins
+    if (process.env.NODE_ENV !== 'production') {
+      if (origin.includes('localhost') || origin.includes('127.0.0.1') || origin.startsWith('file://')) {
+        return callback(null, true);
+      }
+    }
     
     if (allowedOrigins.length === 0 || allowedOrigins.includes(origin)) {
       callback(null, true);
@@ -2163,7 +2222,7 @@ const generateAssetReclaimCaseId = () => 'AR-' + crypto.randomBytes(6).toString(
 
 app.post('/api/asset-reclaim', assetReclaimUpload.array('files', 5), async (req, res) => {
   try {
-    const { company, contactName, email, phone, propertyAddress, details } = req.body;
+    const { company, contactName, email, phone, amountLost, propertyAddress, details } = req.body;
     
     // Debug logging
     console.log('Asset reclaim form submission:', {
@@ -2171,13 +2230,14 @@ app.post('/api/asset-reclaim', assetReclaimUpload.array('files', 5), async (req,
       contactName,
       email,
       phone,
+      amountLost,
       propertyAddress,
       details,
       filesCount: req.files ? req.files.length : 0
     });
     
-    if (!company || !contactName || !email || !details) {
-      console.error('Missing required fields:', { company: !!company, contactName: !!contactName, email: !!email, details: !!details });
+    if (!company || !contactName || !email || !amountLost || !details) {
+      console.error('Missing required fields:', { company: !!company, contactName: !!contactName, email: !!email, amountLost: !!amountLost, details: !!details });
       if (req.files) for (const f of req.files) try { await fs.unlink(f.path); } catch(e){}
       return res.status(400).json({ error: 'Missing required fields' });
     }
@@ -2218,6 +2278,7 @@ app.post('/api/asset-reclaim', assetReclaimUpload.array('files', 5), async (req,
       contactName,
       email,
       phone,
+      amountLost,
       propertyAddress,
       details,
       files: savedFiles,

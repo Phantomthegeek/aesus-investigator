@@ -1,0 +1,178 @@
+# Nginx Configuration Example for Aesus Asset Reclaim
+# 
+# This configuration sets up:
+# 1. Reverse proxy for backend API
+# 2. Static file serving for frontend
+# 3. SSL/HTTPS support
+# 4. Security headers
+#
+# Copy this to /etc/nginx/sites-available/aesus
+# Then: ln -s /etc/nginx/sites-available/aesus /etc/nginx/sites-enabled/
+# Test: nginx -t
+# Reload: systemctl reload nginx
+
+# Backend API Server (Subdomain Option)
+# If using api.yourdomain.com for backend
+server {
+    listen 80;
+    listen [::]:80;
+    server_name api.yourdomain.com;
+
+    # Redirect HTTP to HTTPS
+    return 301 https://$server_name$request_uri;
+}
+
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name api.yourdomain.com;
+
+    # SSL Certificate (Let's Encrypt)
+    ssl_certificate /etc/letsencrypt/live/api.yourdomain.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/api.yourdomain.com/privkey.pem;
+    
+    # SSL Configuration
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers HIGH:!aNULL:!MD5;
+    ssl_prefer_server_ciphers on;
+    ssl_session_cache shared:SSL:10m;
+    ssl_session_timeout 10m;
+
+    # Security Headers
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header X-XSS-Protection "1; mode=block" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+
+    # Proxy to Node.js backend
+    location / {
+        proxy_pass http://localhost:3000;
+        proxy_http_version 1.1;
+        
+        # WebSocket support (if needed)
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        
+        # Standard proxy headers
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header X-Forwarded-Port $server_port;
+        
+        # Timeouts
+        proxy_connect_timeout 60s;
+        proxy_send_timeout 60s;
+        proxy_read_timeout 60s;
+        
+        # Disable buffering for file uploads
+        proxy_request_buffering off;
+        proxy_buffering off;
+        
+        # Cache bypass
+        proxy_cache_bypass $http_upgrade;
+    }
+
+    # File upload size limit (adjust as needed)
+    client_max_body_size 50M;
+}
+
+# Frontend Static Site (Main Domain)
+server {
+    listen 80;
+    listen [::]:80;
+    server_name yourdomain.com www.yourdomain.com;
+
+    # Redirect HTTP to HTTPS
+    return 301 https://$server_name$request_uri;
+}
+
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name yourdomain.com www.yourdomain.com;
+
+    # SSL Certificate (Let's Encrypt)
+    ssl_certificate /etc/letsencrypt/live/yourdomain.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/yourdomain.com/privkey.pem;
+    
+    # SSL Configuration
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers HIGH:!aNULL:!MD5;
+    ssl_prefer_server_ciphers on;
+
+    # Document root (where your HTML files are)
+    root /var/www/aesus;
+    index index.html;
+
+    # Security Headers
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header X-XSS-Protection "1; mode=block" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+
+    # Serve static files
+    location / {
+        try_files $uri $uri/ =404;
+        
+        # Cache static assets
+        location ~* \.(jpg|jpeg|png|gif|ico|css|js|svg|woff|woff2|ttf|eot)$ {
+            expires 1y;
+            add_header Cache-Control "public, immutable";
+        }
+    }
+
+    # Proxy API requests to backend (if using same domain)
+    location /api {
+        proxy_pass http://localhost:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_cache_bypass $http_upgrade;
+        
+        # File upload support
+        client_max_body_size 50M;
+        proxy_request_buffering off;
+    }
+
+    # Deny access to sensitive files
+    location ~ /\. {
+        deny all;
+        access_log off;
+        log_not_found off;
+    }
+
+    location ~ \.(env|log|json)$ {
+        deny all;
+        access_log off;
+        log_not_found off;
+    }
+}
+
+# Alternative: Single Domain Setup (Backend and Frontend on same domain)
+# Use this if you want everything on yourdomain.com
+# 
+# server {
+#     listen 443 ssl http2;
+#     server_name yourdomain.com www.yourdomain.com;
+#     
+#     root /var/www/aesus;
+#     index index.html;
+#     
+#     # Frontend
+#     location / {
+#         try_files $uri $uri/ =404;
+#     }
+#     
+#     # Backend API
+#     location /api {
+#         proxy_pass http://localhost:3000;
+#         # ... (same proxy settings as above)
+#     }
+# }
+

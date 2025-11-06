@@ -1,4 +1,15 @@
-// Icon definitions for Aesus Asset Reclaim
+/**
+ * icons.js - SVG Icon System for Aesus Asset Reclaim
+ * 
+ * This file contains all SVG icon definitions used throughout the website.
+ * Icons are defined as inline SVG strings and can be inserted into elements
+ * with the [data-icon] attribute via the initAllIcons() function.
+ * 
+ * Usage:
+ *   <span data-icon="forex"></span>  // Renders the forex icon
+ * 
+ * All icons use currentColor, so they inherit the text color of their parent element.
+ */
 const Icons = {
     // Service Icons
     forex: `<svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -168,84 +179,138 @@ const Icons = {
     </svg>`
 };
 
-// Simple function to insert icon into element
+/**
+ * insertIcon(iconName, targetElement)
+ * 
+ * Inserts an SVG icon into a target element.
+ * 
+ * @param {string} iconName - Name of the icon (must exist in Icons object)
+ * @param {HTMLElement} targetElement - Element to insert icon into
+ * @returns {boolean} - True if successful, false otherwise
+ * 
+ * This function:
+ * - Validates that the icon exists and target element is valid
+ * - Sets accessibility attributes (aria-hidden) for decorative icons
+ * - Skips insertion if icon already exists to avoid duplicates
+ * - Inserts the SVG markup directly into the element
+ */
 function insertIcon(iconName, targetElement) {
+    // Validate inputs
     if (!targetElement || !Icons[iconName]) {
         return false;
     }
     
-    // Ensure decorative icons are hidden from AT
+    // Mark as decorative for screen readers (icons are visual only)
     targetElement.setAttribute('aria-hidden', 'true');
     
-    // Skip if already has SVG content
+    // Skip if icon already inserted (prevents duplicates)
     if (targetElement.querySelector('svg')) {
         return true;
     }
     
-    // Insert the SVG content directly
+    // Insert the SVG markup
     targetElement.innerHTML = Icons[iconName];
     
-    // Also mark inserted SVG as aria-hidden and non-focusable
+    // Also mark the SVG element itself as non-accessible
     const svg = targetElement.querySelector('svg');
     if (svg) {
         svg.setAttribute('aria-hidden', 'true');
-        svg.setAttribute('focusable', 'false');
+        svg.setAttribute('focusable', 'false');  // Prevent keyboard focus
     }
     
     return true;
 }
 
-// Global function to initialize all icons
+/**
+ * initAllIcons()
+ * 
+ * Scans the entire page for elements with [data-icon] attributes and
+ * inserts the corresponding SVG icons. This is called on page load
+ * and when new elements are dynamically added.
+ * 
+ * Usage: Elements with data-icon="iconName" will automatically get the icon inserted.
+ */
 function initAllIcons() {
+    // Find all elements with data-icon attribute
     const iconElements = document.querySelectorAll('[data-icon]');
     
     iconElements.forEach(el => {
-        // Clear existing content first
+        // Clear any existing content first
         el.innerHTML = '';
         const iconName = el.getAttribute('data-icon');
+        
+        // Insert icon if it exists in the Icons object
         if (iconName && Icons[iconName]) {
             insertIcon(iconName, el);
         }
     });
 }
 
-// Auto-initialize icons when DOM is ready
+/**
+ * Auto-Initialization
+ * 
+ * Automatically initializes icons when the DOM is ready.
+ * Also sets up a MutationObserver to watch for dynamically added elements
+ * (useful for single-page applications or AJAX-loaded content).
+ */
 (function() {
+    /**
+     * initIcons()
+     * Wrapper function to call initAllIcons()
+     */
     function initIcons() {
         initAllIcons();
     }
     
+    // Check if DOM is still loading
     if (document.readyState === 'loading') {
+        // Wait for DOM to be ready
         document.addEventListener('DOMContentLoaded', initIcons);
     } else {
+        // DOM already loaded, initialize immediately
         initIcons();
     }
     
-    // Watch for dynamically added elements
+    /**
+     * MutationObserver for Dynamic Content
+     * 
+     * Watches for new elements added to the page and re-initializes icons
+     * when elements with [data-icon] attributes are added.
+     * This ensures icons work in dynamically loaded content.
+     */
     const observer = new MutationObserver(function(mutations) {
         let shouldReinit = false;
+        
+        // Check each mutation for new nodes with data-icon attribute
         mutations.forEach(function(mutation) {
             if (mutation.addedNodes.length > 0) {
                 mutation.addedNodes.forEach(function(node) {
+                    // Check if new node has data-icon attribute
                     if (node.nodeType === 1 && node.hasAttribute && node.hasAttribute('data-icon')) {
                         shouldReinit = true;
                     }
                 });
             }
         });
+        
+        // Re-initialize all icons if new icon elements were added
         if (shouldReinit) {
             initAllIcons();
         }
     });
     
+    // Start observing the document body for changes
     if (document.body) {
         observer.observe(document.body, {
-            childList: true,
-            subtree: true
+            childList: true,    // Watch for added/removed child nodes
+            subtree: true       // Watch all descendants, not just direct children
         });
     }
 })();
 
-// Make functions available globally
-window.insertIcon = insertIcon;
-window.initAllIcons = initAllIcons;
+// ============================================================================
+// GLOBAL EXPORTS
+// ============================================================================
+// Make functions available globally for manual use if needed
+window.insertIcon = insertIcon;      // Manually insert a single icon
+window.initAllIcons = initAllIcons; // Manually re-initialize all icons
