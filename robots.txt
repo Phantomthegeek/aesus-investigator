@@ -1,0 +1,26 @@
+# robots.txt for Aesus Asset Reclaim
+# https://aesusassetreclaim.com/robots.txt
+
+User-agent: *
+Allow: /
+Disallow: /admin-login.html
+Disallow: /admin-dashboard.html
+Disallow: /client-login.html
+Disallow: /client-dashboard.html
+Disallow: /backend/
+Disallow: /api/
+
+# Allow important pages
+Allow: /index.html
+Allow: /services.html
+Allow: /process.html
+Allow: /asset-reclaim.html
+Allow: /privacy-policy.html
+Allow: /terms-of-service.html
+
+# Sitemap location
+Sitemap: https://aesusassetreclaim.com/sitemap.xml
+
+# Crawl delay (optional, adjust as needed)
+Crawl-delay: 1
+

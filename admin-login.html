@@ -399,15 +399,18 @@
         const errorMessage = document.getElementById('errorMessage');
         let isSubmitting = false;
         
-            // Detect backend URL
+            // Detect backend URL dynamically
             const getBackendUrl = () => {
                 const hostname = window.location.hostname;
                 const port = window.location.port || '3001';
+                const protocol = window.location.protocol;
+                
                 if (hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '') {
-                    // Use the same port as the current page, or default to 3001
+                    // Local development: use localhost with same port
                     return `http://localhost:${port}`;
                 }
-                return 'https://aesus-investigator-backend.herokuapp.com';
+                // Production: use same origin (backend should be on same domain/port)
+                return `${protocol}//${hostname}${port ? ':' + port : ''}`;
             };
             const API_BASE_URL = getBackendUrl();
             
@@ -458,15 +461,19 @@
             const btnContent = loginBtn.querySelector('.btn-content');
             btnContent.innerHTML = '<span class="spinner"></span> <span>Signing in...</span>';
             
-            // Detect backend URL
+            // Detect backend URL dynamically
             const getBackendUrl = () => {
                 const hostname = window.location.hostname;
                 const port = window.location.port || '3001';
+                const protocol = window.location.protocol;
+                
                 if (hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '') {
-                    // Use the same port as the current page, or default to 3001
+                    // Local development: use localhost with same port
                     return `http://localhost:${port}`;
                 }
-                return 'https://aesus-investigator-backend.herokuapp.com';
+                // Production: use same origin (backend should be on same domain/port)
+                // If backend is on different port, adjust accordingly
+                return `${protocol}//${hostname}${port ? ':' + port : ''}`;
             };
             const API_BASE_URL = getBackendUrl();
             console.log('Using backend URL:', API_BASE_URL);

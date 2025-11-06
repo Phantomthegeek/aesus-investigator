@@ -264,7 +264,8 @@ const transporter = nodemailer.createTransport({
 });
 
 // Set default email from address
-const DEFAULT_EMAIL_FROM = process.env.DEFAULT_EMAIL_FROM || process.env.EMAIL_USER || 'noreply@aesusinvestigators.com';
+// Uses contact@aesusinvestigators.com as the default sender
+const DEFAULT_EMAIL_FROM = process.env.DEFAULT_EMAIL_FROM || process.env.EMAIL_USER || 'contact@aesusinvestigators.com';
 
 // SECURITY FIX: Enhanced helmet configuration
 app.use(helmet({

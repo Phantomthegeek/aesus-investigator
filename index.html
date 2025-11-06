@@ -24,11 +24,29 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     
     <!-- Page Title and Description for SEO -->
-    <title>Asset Recovery - Aesus Asset Reclaim</title>
-    <meta name="description" content="Professional asset recovery services with secure case submission and confidential handling. Recover your lost, unclaimed, or misappropriated assets.">
+    <title>Asset Recovery - Aesus Asset Reclaim | No Win, No Fee</title>
+    <meta name="description" content="Professional asset recovery services with secure case submission and confidential handling. Recover your lost, unclaimed, or misappropriated assets. 100% free assessment, no win no fee guarantee.">
+    <meta name="keywords" content="asset recovery, funds recovery, financial fraud recovery, unclaimed assets, no win no fee, asset reclaim, financial investigation">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aesusassetreclaim.com/">
+    <meta property="og:title" content="Asset Recovery - Aesus Asset Reclaim | No Win, No Fee">
+    <meta property="og:description" content="Professional asset recovery services. 100% free assessment, no win no fee guarantee. Recover your lost assets today.">
+    <meta property="og:image" content="https://aesusassetreclaim.com/og-image.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://aesusassetreclaim.com/">
+    <meta property="twitter:title" content="Asset Recovery - Aesus Asset Reclaim">
+    <meta property="twitter:description" content="Professional asset recovery services. 100% free assessment, no win no fee guarantee.">
+    <meta property="twitter:image" content="https://aesusassetreclaim.com/og-image.jpg">
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://aesusassetreclaim.com/">
     
     <!-- External Stylesheets and Scripts -->
     <link rel="stylesheet" href="styles.css">
@@ -1067,7 +1085,7 @@
                 </div>
 
                 <!-- FAQ Section -->
-                <div class="faq-section" style="margin: 3rem 0;">
+                <div id="faq" class="faq-section" style="margin: 3rem 0; scroll-margin-top: 100px;">
                     <div class="card" style="animation-delay: 0.4s;">
                         <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;">
                             <div class="feature-icon">❓</div>
@@ -1101,6 +1119,56 @@
                             </div>
                             <div class="faq-answer">
                                 We recover all types of assets including: unclaimed bank accounts, dividends, bonds, stocks, property deposits, pension funds, inheritance, insurance claims, and financial settlements. If it's rightfully yours, we can help recover it.
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>Is my information kept confidential?</span>
+                                <span class="faq-toggle">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                Absolutely. All information you provide is kept strictly confidential and secure. We use industry-standard encryption and never share your details with third parties without your explicit consent. Your privacy is our top priority.
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>How much does the free assessment cost?</span>
+                                <span class="faq-toggle">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                The assessment is completely free - $0. There are no hidden fees, no charges, and no obligation to proceed. We provide a comprehensive evaluation of your case at no cost to you.
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>What happens after I submit my case?</span>
+                                <span class="faq-toggle">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                After you submit your case, a licensed investigator will review your information within 24 hours. You'll receive a detailed assessment and recovery plan. If you choose to proceed, we'll begin the investigation process immediately.
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>Do you work with cases outside the USA?</span>
+                                <span class="faq-toggle">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                Yes, we handle cases globally. While we're based in the United States, we have experience recovering assets from international sources including Europe, Asia, and other regions. Contact us to discuss your specific situation.
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>What if my case is unsuccessful?</span>
+                                <span class="faq-toggle">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                If we're unable to recover your assets, you pay nothing. Our "No Win, No Fee" guarantee means you only pay a percentage of successfully recovered funds. There are no upfront costs or fees if recovery is unsuccessful.
                             </div>
                         </div>
                     </div>
@@ -1512,9 +1580,20 @@
                             apiFormData.append('service', data.caseType);    // Map caseType -> service
                             apiFormData.append('message', data.message);
                             
+                            // Detect backend URL dynamically
+                            const getBackendUrl = () => {
+                                const hostname = window.location.hostname;
+                                const port = window.location.port || '3001';
+                                const protocol = window.location.protocol;
+                                
+                                if (hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '') {
+                                    return `http://localhost:${port}`;
+                                }
+                                return `${protocol}//${hostname}${port ? ':' + port : ''}`;
+                            };
+                            
                             // Send form data to backend API
-                            // Note: In production, this should use the same backend URL detection as admin pages
-                            const response = await fetch('https://aesus-investigator-backend.herokuapp.com/api/contact', {
+                            const response = await fetch(`${getBackendUrl()}/api/contact`, {
                                 method: 'POST',
                                 body: apiFormData
                             });

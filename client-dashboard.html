@@ -934,6 +934,18 @@
             });
         }
         
+        // Detect backend URL dynamically
+        const getBackendUrl = () => {
+            const hostname = window.location.hostname;
+            const port = window.location.port || '3001';
+            const protocol = window.location.protocol;
+            
+            if (hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '') {
+                return `http://localhost:${port}`;
+            }
+            return `${protocol}//${hostname}${port ? ':' + port : ''}`;
+        };
+        
         // Main Dashboard Functions
         async function loadDashboard() {
             try {
@@ -966,7 +978,7 @@
                 }
                 
                 // Fetch cases
-                const response = await fetch(`https://aesus-investigator-backend.herokuapp.com/api/client/cases?token=${token}`);
+                const response = await fetch(`${getBackendUrl()}/api/client/cases?token=${token}`);
                 
                 if (!response.ok) {
                     const errorData = await response.json().catch(() => ({}));
@@ -1365,7 +1377,7 @@
         async function downloadAllFiles(caseId, token) {
             try {
                 showToast('Preparing download...', 'info');
-                const response = await fetch(`https://aesus-investigator-backend.herokuapp.com/api/client/cases/${caseId}/download-all?token=${token}`);
+                const response = await fetch(`${getBackendUrl()}/api/client/cases/${caseId}/download-all?token=${token}`);
                 const data = await response.json();
                 
                 if (!data.success) {
@@ -1444,7 +1456,7 @@
             }
             
             try {
-                const response = await fetch('https://aesus-investigator-backend.herokuapp.com/api/client/reply', {
+                const response = await fetch(`${getBackendUrl()}/api/client/reply`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ token, caseId, message })
@@ -1876,7 +1888,7 @@
                         formData.append('files', file);
                     });
                     
-                    const response = await fetch('https://aesus-investigator-backend.herokuapp.com/api/contact', {
+                    const response = await fetch(`${getBackendUrl()}/api/contact`, {
                         method: 'POST',
                         body: formData
                     });
