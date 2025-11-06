@@ -367,6 +367,58 @@
         }
     };
 
+    /**
+     * initMobileMenu()
+     * Initializes mobile menu toggle functionality for all pages
+     */
+    function initMobileMenu() {
+        try {
+            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+            const nav = document.querySelector('.nav');
+            
+            if (mobileMenuToggle && nav) {
+                // Toggle menu on button click
+                mobileMenuToggle.addEventListener('click', function(e) {
+                    e.stopPropagation(); // Prevent event bubbling
+                    const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                    const newState = !isExpanded;
+                    
+                    this.setAttribute('aria-expanded', newState);
+                    nav.classList.toggle('active');
+                    
+                    // Change icon based on state
+                    this.textContent = newState ? '✕' : '☰';
+                });
+                
+                // Close menu when clicking on nav links
+                nav.querySelectorAll('.nav-link').forEach(link => {
+                    link.addEventListener('click', function() {
+                        nav.classList.remove('active');
+                        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                        mobileMenuToggle.textContent = '☰';
+                    });
+                });
+                
+                // Close menu when clicking outside the header
+                document.addEventListener('click', function(event) {
+                    const header = document.querySelector('.header');
+                    if (header && !header.contains(event.target)) {
+                        nav.classList.remove('active');
+                        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                        mobileMenuToggle.textContent = '☰';
+                    }
+                });
+                
+                // Prevent menu from closing when clicking inside it
+                nav.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                });
+            }
+        } catch (e) {
+            console.error('Mobile menu initialization error:', e);
+        }
+    }
+
     onReady(function() {
         setNavActive();
         standardizeButtons();
@@ -375,6 +427,7 @@
         initDropdowns();
         enhanceSelects();
         injectFocusStyles();
+        initMobileMenu(); // Initialize mobile menu toggle
         runA11yDevChecks();
     });
 })();

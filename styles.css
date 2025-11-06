@@ -900,7 +900,7 @@ body::before {
     
     /* Hide desktop nav, show mobile nav */
     .nav {
-        display: none;
+        display: flex !important;
         position: absolute;
         top: 100%;
         left: 0;
@@ -919,16 +919,19 @@ body::before {
         overflow: hidden;
         transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
                     padding 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                    opacity 0.3s ease;
+                    opacity 0.3s ease,
+                    visibility 0.3s ease;
         opacity: 0;
+        visibility: hidden;
     }
     
-    /* Show nav when active */
+    /* Show nav when active (toggle menu open) */
     .nav.active {
-        display: flex;
+        display: flex !important;
         max-height: 500px;
         padding: 0.5rem 0;
         opacity: 1;
+        visibility: visible;
     }
     
     .nav-link {
